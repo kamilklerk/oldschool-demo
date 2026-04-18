@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Old School — Szkoła DJ-ska</title>
+  <link rel="icon" type="image/png" href="images/Oldschool logo-white.png" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&display=swap');
+
+    :root {
+      --yellow: #d4ff00;
+      --black: #080808;
+      --dark: #111111;
+      --card: #161616;
+      --border: #2a2a2a;
+      --text: #e0e0e0;
+      --muted: #666;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Mono', monospace;
+      background: var(--black);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 72px;
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-img {
+      height: 72px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 4px;
+      transition: color .2s, background .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--yellow);
+      background: rgba(212,255,0,0.06);
+    }
+
+    .nav-cta {
+      background: var(--yellow) !important;
+      color: var(--black) !important;
+      border-radius: 4px;
+    }
+
+    .nav-cta:hover {
+      background: #c0e800 !important;
+      color: var(--black) !important;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 40px 80px;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 50% 50%, rgba(212,255,0,0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 80% 50% at 20% 90%, rgba(0,160,255,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 10%, rgba(212,255,0,0.03) 0%, transparent 55%);
+    }
+
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .hero-orb-1 {
+      width: 500px; height: 500px;
+      top: -100px; right: -100px;
+      background: radial-gradient(circle, rgba(212,255,0,0.07) 0%, transparent 70%);
+    }
+
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      bottom: -80px; left: -80px;
+      background: radial-gradient(circle, rgba(0,160,255,0.05) 0%, transparent 70%);
+    }
+
+    .hero-orb-3 {
+      width: 300px; height: 300px;
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(212,255,0,0.04) 0%, transparent 70%);
+    }
+
+    .hero-vinyl {
+      position: absolute;
+      right: -80px;
+      bottom: 60px;
+      width: clamp(320px, 45vw, 620px);
+      height: auto;
+      opacity: 0.20;
+      filter: saturate(0.6) hue-rotate(50deg) brightness(0.8);
+      pointer-events: none;
+      transform: rotate(-15deg);
+    }
+
+    .hero-inmerse {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: clamp(280px, 38vw, 500px);
+      height: auto;
+      opacity: 0.23;
+      filter: brightness(0.85) saturate(0.7);
+      pointer-events: none;
+      transform: rotate(12deg) scaleX(-1);
+      transform-origin: center center;
+    }
+
+    .hero-content {
+      position: relative;
+      max-width: 900px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      text-decoration: none;
+      cursor: pointer;
+      transition: background .2s, border-color .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212,255,0,0.1);
+      border: 1px solid rgba(212,255,0,0.3);
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--yellow);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .hero-logo-wrap {
+      margin: 0 auto 40px;
+      width: clamp(200px, 36vw, 320px);
+    }
+
+    .hero-logo {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 50px rgba(212,255,0,0.3));
+    }
+
+    .hero-subtitle {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(20px, 4vw, 36px);
+      letter-spacing: 8px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #d0d0d0;
+      max-width: 560px;
+      margin: 0 auto 48px;
+    }
+
+    .hero-courses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 48px;
+    }
+
+    .hero-course-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(212,255,0,0.07);
+      border: 1px solid rgba(212,255,0,0.25);
+      border-radius: 8px;
+      padding: 12px 20px;
+      min-width: 160px;
+    }
+
+    .hero-course-pill .pill-hours {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .hero-course-pill .pill-name {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 0 30px rgba(212,255,0,0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(212,255,0,0.4);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 16px 40px;
+      border-radius: 4px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      transition: border-color .2s, color .2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      justify-content: center;
+      margin-top: 80px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      color: var(--yellow);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── SECTION BASICS ── */
+    section {
+      padding: 100px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(40px, 6vw, 72px);
+      letter-spacing: 2px;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+
+    .section-desc {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #aaa;
+      max-width: 560px;
+    }
+
+    /* ── WHY BG PHOTO ── */
+    .why-bg-photo {
+      position: absolute;
+      top: 0; bottom: 0; left: 0; right: 50%;
+      background-image: url('images/INMERSE_1.png');
+      background-size: cover;
+      background-position: center -60px;
+      opacity: 0.38;
+      pointer-events: none;
+      z-index: 0;
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 75%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 75%, transparent 100%);
+    }
+
+    /* ── WHY ── */
+    #why .inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .why-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-card:hover {
+      border-color: rgba(212,255,0,0.3);
+      transform: translateY(-4px);
+    }
+
+    .why-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.20;
+      z-index: 0;
+      transition: opacity .3s;
+    }
+
+    .why-card:hover .why-card-bg {
+      opacity: 0.28;
+    }
+
+    .why-card > *:not(.why-card-bg) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .why-card-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 14px;
+      color: var(--yellow);
+      opacity: 0.9;
+    }
+
+    .why-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .why-card p {
+      font-size: 13px;
+      color: #999;
+      line-height: 1.6;
+    }
+
+    .why-card.highlight {
+      background: rgba(212,255,0,0.06);
+      border-color: rgba(212,255,0,0.3);
+    }
+
+    /* ── COURSES ── */
+    #courses {
+      background: var(--dark);
+      max-width: 100%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    #courses .inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    #courses .header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    #courses .section-desc {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .course-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      transition: border-color .2s, transform .2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .course-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--border);
+      transition: background .2s;
+    }
+
+    .course-card:hover {
+      border-color: rgba(212,255,0,0.3);
+      transform: translateY(-6px);
+    }
+
+    .course-card:hover::before {
+      background: var(--yellow);
+    }
+
+    .course-card.featured {
+      border-color: rgba(212,255,0,0.4);
+      background: rgba(212,255,0,0.04);
+    }
+
+    .course-card.featured::before {
+      background: var(--yellow);
+    }
+
+    .featured-tag {
+      position: absolute;
+      top: 20px; right: 20px;
+      background: var(--yellow);
+      color: var(--black);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .course-level {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .course-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .course-hours {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .course-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      color: var(--yellow);
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+
+    .course-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      margin-bottom: 32px;
+    }
+
+    .course-features li {
+      font-size: 14px;
+      color: #aaa;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .course-features li::before {
+      content: '✓';
+      color: var(--yellow);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .course-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .course-tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color .15s, color .15s, background .15s;
+    }
+
+    .course-tab.active {
+      background: rgba(212,255,0,0.1);
+      border-color: rgba(212,255,0,0.4);
+      color: var(--yellow);
+    }
+
+    .courses-note {
+      color: var(--yellow) !important;
+      font-size: 13px !important;
+      opacity: 0.85;
+    }
+
+    /* ── LOCATION ── */
+    #location .inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .loc-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .loc-tab {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 8px 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: border-color .15s, color .15s, background .15s;
+    }
+
+    .loc-tab.active {
+      background: rgba(212,255,0,0.1);
+      border-color: rgba(212,255,0,0.4);
+      color: var(--yellow);
+    }
+
+    .loc-panel { display: none; }
+    .loc-panel.active { display: block; animation: fadeUp .3s ease; }
+
+    .location-col { display: flex; flex-direction: column; }
+
+    .location-box {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      background: var(--card);
+    }
+
+    .location-photo {
+      position: absolute;
+      inset: 0;
+      background-image: url('images/DSC01714-HDR.jpg');
+      background-size: cover;
+      background-position: center top;
+      opacity: 0.28;
+      z-index: 0;
+    }
+
+    .location-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(8,8,8,0.6) 0%, transparent 100%);
+    }
+
+    .location-box > *:not(.location-photo) {
+      position: relative;
+      z-index: 1;
+    }
+
+    .location-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(0,180,255,0.1);
+      border: 1px solid rgba(0,180,255,0.2);
+      color: #00b4ff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .location-box h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px;
+      letter-spacing: 2px;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    .location-box p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #aaa;
+      margin-bottom: 24px;
+    }
+
+    .location-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 14px;
+      color: #aaa;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .location-detail:last-child { border-bottom: none; }
+
+    .location-detail strong { color: #fff; }
+
+    .loc-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 1px;
+      opacity: 0.7;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--dark);
+      max-width: 100%;
+      border-top: 1px solid var(--border);
+    }
+
+    #contact .inner {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-desc {
+      color: #bbb !important;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .form-stepper { margin-top: 48px; text-align: left; }
+
+    .form-step.hidden { display: none; }
+
+    .form-step.visible { animation: fadeUp .35s ease; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .step-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .course-choice {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .choice-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: border-color .2s, transform .2s, background .2s;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .choice-card:hover {
+      border-color: var(--yellow);
+      background: rgba(212,255,0,0.05);
+      transform: translateY(-4px);
+    }
+
+    .choice-card svg { width: 40px; height: 40px; stroke: var(--yellow); }
+
+    .choice-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+
+    .choice-sub {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    .step2-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .back-btn {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color .2s, border-color .2s;
+    }
+
+    .back-btn:hover { color: #fff; border-color: #fff; }
+
+    .chosen-tag {
+      background: rgba(212,255,0,0.1);
+      border: 1px solid rgba(212,255,0,0.3);
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .form-simple { display: flex; flex-direction: column; gap: 16px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+    .form-group label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      font-size: 15px;
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      transition: border-color .2s;
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--yellow); }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .msg-toggle {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 0;
+      transition: color .2s;
+    }
+
+    .msg-toggle:hover { color: var(--yellow); }
+
+    .form-btn {
+      width: 100%;
+      text-align: center;
+      padding: 18px;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-note { font-size: 11px; color: var(--muted); text-align: center; }
+
+    .hidden { display: none !important; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-left {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      color: #fff;
+    }
+
+    .footer-left span { color: var(--yellow); }
+
+    .footer-center {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-link {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      transition: border-color .2s, color .2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+
+    /* ── RESPONSIVE ── */
+    .nav-cta-mobile { display: none; }
+
+    @media (max-width: 900px) {
+      /* NAV */
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .nav-cta-mobile {
+        display: block;
+        background: var(--yellow);
+        color: var(--black);
+        font-weight: 800;
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 10px 18px;
+        border-radius: 4px;
+        text-decoration: none;
+      }
+      .nav-logo-img { height: 52px; }
+
+      /* HERO */
+      #hero { padding: 100px 24px 60px; min-height: auto; }
+      .hero-vinyl { display: none; }
+      .hero-inmerse { display: none; }
+      .hero-badge { font-size: 10px; padding: 5px 12px; text-align: center; }
+      .hero-courses { flex-direction: column; align-items: stretch; }
+      .hero-course-pill { min-width: auto; flex-direction: row; justify-content: flex-start; gap: 16px; }
+      .hero-buttons { flex-direction: column; }
+      .btn-primary, .btn-secondary { text-align: center; }
+
+      /* SEKCJE */
+      section { padding: 60px 24px; }
+      #why .inner,
+      #location .inner { grid-template-columns: 1fr; gap: 40px; }
+      .locations-wrap { grid-template-columns: 1fr; }
+
+      /* WHY BG — wyśrodkowane za tytułem, nie nachodzi na karty */
+      .why-bg-photo {
+        left: 0; right: 0;
+        top: 0; bottom: auto;
+        height: 340px;
+        background-position: center 30%;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 70%, transparent 100%);
+        mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 70%, transparent 100%);
+      }
+
+      /* WHY — 2 kolumny zamiast 4 */
+      .why-cards { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .why-card { padding: 24px 20px; }
+
+      /* KURSY */
+      .courses-grid { grid-template-columns: 1fr; }
+      .course-card { padding: 28px 24px; }
+
+      /* KONTAKT */
+      .contact-form { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: auto; }
+      .choice-cards { grid-template-columns: 1fr; }
+
+      /* FOOTER */
+      footer { flex-direction: column; align-items: center; text-align: center; gap: 16px; }
+      .social-links { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      /* Na bardzo małych — why w 1 kolumnę */
+      .why-cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="images/Oldschool logo-white.png" alt="Old School" class="nav-logo-img" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#why">Dlaczego my?</a></li>
+    <li><a href="#courses">Kursy</a></li>
+    <li><a href="#location">Lokalizacja</a></li>
+    <li><a href="#contact" class="nav-cta">Dowiedz się więcej!</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta-mobile">Dowiedz się więcej!</a>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <img src="images/turntable-2593014_1280.webp" class="hero-vinyl" alt="" />
+  <img src="images/INMERSE_3.png" class="hero-inmerse" alt="" />
+  <div class="hero-content">
+    <a href="#contact" class="hero-badge">Wypełnij formularz i odbierz DARMOWĄ lekcję 0</a>
+    <div class="hero-logo-wrap">
+      <img src="images/Oldschool logo-white.png" alt="Old School Szkoła DJ-ska" class="hero-logo" />
+    </div>
+    <p class="hero-subtitle">Szkoła DJ-ska · Drugi Dom</p>
+    <p class="hero-desc">
+      Jedyna szkoła DJ-ska w Trójmieście prowadzona przez profesjonalny klub muzyczny.
+      Ucz się na riderowym sprzęcie, w warunkach klubowych!
+    </p>
+    <div class="hero-courses">
+      <div class="hero-course-pill">
+        <span class="pill-hours">16H / 24H</span>
+        <span class="pill-name">Kurs podstawowy</span>
+      </div>
+      <div class="hero-course-pill">
+        <span class="pill-hours">52H</span>
+        <span class="pill-name">Kurs rozszerzony</span>
+      </div>
+      <div class="hero-course-pill">
+        <span class="pill-hours">40H</span>
+        <span class="pill-name">Kurs produkcji muzyki<br>podstawowy / zaawansowany</span>
+      </div>
+    </div>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn-primary">Umów bezpłatną rozmowę</a>
+      <a href="#courses" class="btn-secondary">Zobacz ofertę</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-number">60+</div>
+        <div class="stat-label">Kursantów</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">500+</div>
+        <div class="stat-label">Godzin zajęć</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">8</div>
+        <div class="stat-label">Miesięcy działalności</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY -->
+<section id="why" style="position:relative; overflow:hidden;">
+  <div class="why-bg-photo"></div>
+  <div class="inner" style="position:relative;z-index:1;">
+    <div>
+      <p class="section-label">Dlaczego Old School</p>
+      <h2 class="section-title">UCZ SIĘ W MIEJSCU,<br>W KTÓRYM WYSTĘPUJĄ DJ-E</h2>
+      <p class="section-desc">
+        Drugi Dom to klub z prawdziwego zdarzenia — dobrze znany na polskiej scenie elektroniki.
+        Zajęcia odbywają się w małych grupach, na tym samym sprzęcie, który znajdziesz w największych
+        klubach w Polsce.
+      </p>
+    </div>
+    <div class="why-cards">
+      <div class="why-card highlight">
+        <div class="why-card-bg" style="background-image:url('images/31_AlphaTheta_CDJ-3000X_PR1_20250822_final-1200-630.webp')"></div>
+        <svg class="why-card-icon" viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="1.4">
+          <!-- body -->
+          <rect x="1" y="1" width="46" height="30" rx="3"/>
+          <!-- screen -->
+          <rect x="5" y="5" width="16" height="10" rx="1.5"/>
+          <!-- waveform lines in screen -->
+          <line x1="7" y1="10" x2="7" y2="12"/><line x1="9" y1="8" x2="9" y2="12"/><line x1="11" y1="9" x2="11" y2="12"/><line x1="13" y1="7" x2="13" y2="12"/><line x1="15" y1="9" x2="15" y2="12"/><line x1="17" y1="8" x2="17" y2="12"/>
+          <!-- small buttons row -->
+          <rect x="5" y="18" width="4" height="2.5" rx="0.5"/>
+          <rect x="11" y="18" width="4" height="2.5" rx="0.5"/>
+          <rect x="5" y="22" width="4" height="2.5" rx="0.5"/>
+          <rect x="11" y="22" width="4" height="2.5" rx="0.5"/>
+          <!-- jog wheel outer -->
+          <circle cx="35" cy="16" r="12"/>
+          <!-- jog wheel inner -->
+          <circle cx="35" cy="16" r="7"/>
+          <!-- jog wheel center dot -->
+          <circle cx="35" cy="16" r="2" fill="currentColor"/>
+          <!-- jog tick marks -->
+          <line x1="35" y1="3" x2="35" y2="5"/>
+          <line x1="35" y1="27" x2="35" y2="29"/>
+          <line x1="22" y1="16" x2="24" y2="16"/>
+          <line x1="46" y1="16" x2="48" y2="16"/>
+        </svg>
+        <h3>Riderowy sprzęt</h3>
+        <p>Pioneer CDJ-3000X, DJM-A9, Xone i Technics — dokładnie to, z czym spotkasz się na imprezach.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-bg" style="background-image:url('images/Still 2026-04-01 171305_1.1.1.png')"></div>
+        <svg class="why-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <h3>Małe grupy</h3>
+        <p>Każdy kursant dostaje maksymalnie dużo czasu przy sprzęcie i indywidualną uwagę.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-bg" style="background-image:url('images/DSC01714-HDR.jpg')"></div>
+        <svg class="why-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <h3>Prawdziwy soundsystem</h3>
+        <p>Grasz na tym samym nagłośnieniu, które napędza imprezy. Żadnych słuchawek studyjnych.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-bg" style="background-image:url('images/IMG_9433.jpg')"></div>
+        <svg class="why-card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <h3>Doświadczeni instruktorzy</h3>
+        <p>Uczą Cię aktywni DJ-e z wieloletnią praktyką na polskiej scenie klubowej.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="inner">
+    <div class="header">
+      <p class="section-label">Oferta kursów</p>
+      <h2 class="section-title">Wybierz kurs dla Ciebie</h2>
+      <p class="section-desc courses-note">* wszystkie kursy prowadzimy od zera — nie musisz mieć doświadczenia</p>
+    </div>
+    <div class="courses-grid">
+
+      <div class="course-card">
+        <p class="course-level">Kurs podstawowy</p>
+        <h3 class="course-name">DJ</h3>
+        <div class="course-tabs">
+          <button class="course-tab active" onclick="switchTab(this, 'basic-digital', 'basic')">Digital</button>
+          <button class="course-tab" onclick="switchTab(this, 'basic-vinyl', 'basic')">Vinyl</button>
+        </div>
+        <p class="course-hours" id="hours-basic-digital">16 godzin zajęć</p>
+        <p class="course-hours" id="hours-basic-vinyl" style="display:none">24 godziny zajęć</p>
+        <p class="course-price" id="price-basic-digital">87 zł/h</p>
+        <p class="course-price" id="price-basic-vinyl" style="display:none">87 zł/h</p>
+        <ul class="course-features" id="features-basic-digital">
+          <li>Obsługa mixera i CDJ</li>
+          <li>BPM matching</li>
+          <li>Podstawy miksowania</li>
+        </ul>
+        <ul class="course-features" id="features-basic-vinyl" style="display:none">
+          <li>Obsługa gramofonów i mixera</li>
+          <li>BPM matching</li>
+          <li>Podstawy miksowania</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Dowiedz się więcej</a>
+      </div>
+
+      <div class="course-card featured">
+        <span class="featured-tag">Polecany</span>
+        <p class="course-level">Kurs rozszerzony</p>
+        <h3 class="course-name">DJ</h3>
+        <div class="course-tabs">
+          <button class="course-tab active" onclick="switchTab(this, 'adv-digital', 'adv')">Digital</button>
+          <button class="course-tab" onclick="switchTab(this, 'adv-vinyl', 'adv')">Vinyl</button>
+        </div>
+        <p class="course-hours" id="hours-adv-digital">52 godziny zajęć</p>
+        <p class="course-hours" id="hours-adv-vinyl" style="display:none">52 godziny zajęć</p>
+        <p class="course-price">75 zł/h</p>
+        <ul class="course-features" id="features-adv-digital">
+          <li>Pełna technika miksowania</li>
+          <li>Harmonic mixing i key mixing</li>
+          <li>Budowanie setu — narracja i energia</li>
+          <li>Praca z efektami i loopami</li>
+          <li>Nagranie demo setu</li>
+          <li>Obsługa social mediów</li>
+          <li><strong>Występ w klubie</strong></li>
+        </ul>
+        <ul class="course-features" id="features-adv-vinyl" style="display:none">
+          <li>Pełna technika miksowania</li>
+          <li>Harmonic mixing i key mixing</li>
+          <li>Budowanie setu — narracja i energia</li>
+          <li>Praca z efektami i loopami</li>
+          <li>Nagranie demo setu</li>
+          <li>Obsługa social mediów</li>
+          <li><strong>Występ w klubie</strong></li>
+        </ul>
+        <a href="#contact" class="btn-primary">Dowiedz się więcej</a>
+      </div>
+
+      <div class="course-card">
+        <p class="course-level">Kurs produkcji</p>
+        <h3 class="course-name">Ableton</h3>
+        <div class="course-tabs">
+          <button class="course-tab active" onclick="switchTab(this, 'abl-basic', 'abl')">Podstawowy</button>
+          <button class="course-tab" onclick="switchTab(this, 'abl-adv', 'abl')">Zaawansowany</button>
+        </div>
+        <p class="course-hours" id="hours-abl-basic">40 godzin zajęć</p>
+        <p class="course-hours" id="hours-abl-adv" style="display:none">40 godzin zajęć</p>
+        <p class="course-price">97 zł/h</p>
+        <ul class="course-features" id="features-abl-basic">
+          <li>Podstawy Ableton Live</li>
+          <li>Tworzenie beatów i instrumentów</li>
+          <li>Miksowanie i aranżacja</li>
+          <li>Eksport i mastering podstawowy</li>
+        </ul>
+        <ul class="course-features" id="features-abl-adv" style="display:none">
+          <li>Zaawansowane techniki produkcji</li>
+          <li>Sound design i synteza</li>
+          <li>Mixing i mastering profesjonalny</li>
+          <li>Wydanie własnego tracku</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Dowiedz się więcej</a>
+      </div>
+
+      <div class="course-card">
+        <p class="course-level">Custom</p>
+        <h3 class="course-name">Indywid&shy;ualny</h3>
+        <p class="course-hours">Ustalamy razem</p>
+        <ul class="course-features">
+          <li>Program dopasowany do Ciebie</li>
+          <li>Elastyczny harmonogram</li>
+          <li>Jeden na jeden z instruktorem</li>
+          <li>Intensywny kurs w krótkim czasie</li>
+        </ul>
+        <a href="#contact" class="btn-secondary">Zapytaj o cenę</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="inner">
+    <div>
+      <p class="section-label">Gdzie nas znajdziesz</p>
+      <h2 class="section-title">Drugi Dom<br>Klub Muzyczny</h2>
+      <p class="section-desc">
+        Jedno z najlepiej wyposażonych miejsc na polskiej scenie elektroniki.
+        Nasza sala do nauki to ta sama przestrzeń, w której odbywają się prawdziwe imprezy.
+      </p>
+    </div>
+    <div class="location-box">
+      <div class="location-photo"></div>
+      <div class="location-tag">
+        <svg class="loc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Gdynia
+      </div>
+      <h3>Drugi Dom</h3>
+      <p>Jeden z najlepiej wyposażonych klubów na polskiej scenie elektroniki. Uczysz się w tej samej przestrzeni, w której odbywają się prawdziwe imprezy.</p>
+      <div class="location-detail">
+        <svg class="loc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span>Zajęcia w tygodniu</span>
+      </div>
+      <div class="location-detail">
+        <svg class="loc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <span>Pioneer CDJ-3000X &nbsp;·&nbsp; DJM-A9 &nbsp;·&nbsp; Xone:92 &nbsp;·&nbsp; Xone:96 &nbsp;·&nbsp; Technics SL-1210</span>
+      </div>
+      <div class="location-detail">
+        <svg class="loc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span>Grupy max. 5 osobowe &nbsp;·&nbsp; zajęcia indywidualne</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="inner">
+    <p class="section-label">Umów rozmowę</p>
+    <h2 class="section-title">ZACZNIJ JUŻ TERAZ</h2>
+    <p class="section-desc contact-desc">Wypełnij formularz i odbierz darmową lekcję 0, a my skontaktujemy się z Tobą!</p>
+
+    <div class="form-stepper">
+
+      <!-- KROK 1 -->
+      <div class="form-step" id="step1">
+        <p class="step-label">Krok 1 z 2 — wybierz kurs</p>
+        <div class="course-choice">
+          <button class="choice-card" onclick="chooseStep('dj')">
+            <svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="1.4" style="width:48px;height:32px;stroke:var(--yellow)">
+              <rect x="1" y="1" width="46" height="30" rx="3"/>
+              <rect x="5" y="5" width="16" height="10" rx="1.5"/>
+              <line x1="7" y1="10" x2="7" y2="12"/><line x1="9" y1="8" x2="9" y2="12"/><line x1="11" y1="9" x2="11" y2="12"/><line x1="13" y1="7" x2="13" y2="12"/><line x1="15" y1="9" x2="15" y2="12"/><line x1="17" y1="8" x2="17" y2="12"/>
+              <rect x="5" y="18" width="4" height="2.5" rx="0.5"/><rect x="11" y="18" width="4" height="2.5" rx="0.5"/>
+              <rect x="5" y="22" width="4" height="2.5" rx="0.5"/><rect x="11" y="22" width="4" height="2.5" rx="0.5"/>
+              <circle cx="35" cy="16" r="12"/><circle cx="35" cy="16" r="7"/><circle cx="35" cy="16" r="2" fill="currentColor"/>
+              <line x1="35" y1="3" x2="35" y2="5"/><line x1="35" y1="27" x2="35" y2="29"/><line x1="22" y1="16" x2="24" y2="16"/><line x1="46" y1="16" x2="48" y2="16"/>
+            </svg>
+            <span class="choice-title">Kurs DJ</span>
+            <span class="choice-sub">Podstawowy · Rozszerzony</span>
+          </button>
+          <button class="choice-card" onclick="chooseStep('produkcja')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span class="choice-title">Kurs Produkcji</span>
+            <span class="choice-sub">Ableton · Podstawowy · Zaawansowany</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- KROK 2 -->
+      <div class="form-step hidden" id="step2">
+        <div class="step2-header">
+          <button class="back-btn" onclick="goBack()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
+            Wróć
+          </button>
+          <p class="step-label">Krok 2 z 2 — Twoje dane</p>
+          <span class="chosen-tag" id="chosen-tag"></span>
+        </div>
+        <form class="form-simple" onsubmit="return false">
+          <div class="form-group">
+            <label>Imię</label>
+            <input type="text" placeholder="Jan" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="jan@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Telefon</label>
+            <input type="tel" placeholder="+48 000 000 000" />
+          </div>
+          <div class="form-group">
+            <label>Preferowana godzina kontaktu</label>
+            <input type="text" placeholder="np. 10:00–13:00" />
+          </div>
+          <div class="form-group msg-toggle-wrap">
+            <button type="button" class="msg-toggle" onclick="toggleMsg()">+ Dodaj wiadomość (opcjonalnie)</button>
+            <textarea id="optional-msg" class="hidden" placeholder="Napisz coś o sobie lub zadaj pytanie..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-btn">Chcę poznać szczegóły — oddzwonimy!</button>
+          <p class="form-note">Nie wysyłamy spamu. Oddzwonimy w ciągu 24h.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">OLD <span>SCHOOL</span> · Szkoła DJ-ska</div>
+  <div class="footer-center">© 2025 Old School DJ · Drugi Dom · Wszelkie prawa zastrzeżone</div>
+  <div class="social-links">
+    <a class="social-link" href="#" title="YouTube">▶</a>
+    <a class="social-link" href="https://www.instagram.com/oldschool.dd?igsh=MXNoNjlxOWllc25jaA%3D%3D&utm_source=qr" target="_blank" rel="noopener" title="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a class="social-link" href="#" title="Facebook">f</a>
+  </div>
+</footer>
+
+<script>
+  function switchTab(btn, id, group) {
+    btn.closest('.course-card').querySelectorAll('.course-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    const groups = { basic: ['basic-digital', 'basic-vinyl'], adv: ['adv-digital', 'adv-vinyl'], abl: ['abl-basic', 'abl-adv'] };
+    const types = groups[group];
+    types.forEach(t => {
+      const h = document.getElementById('hours-' + t);
+      const f = document.getElementById('features-' + t);
+      const p = document.getElementById('price-' + t);
+      if (h) h.style.display = t === id ? '' : 'none';
+      if (f) f.style.display = t === id ? '' : 'none';
+      if (p) p.style.display = t === id ? '' : 'none';
+    });
+  }
+
+  function switchLoc(btn, id) {
+    document.querySelectorAll('.loc-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.loc-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+
+  function chooseStep(type) {
+    document.getElementById('step1').classList.add('hidden');
+    const s2 = document.getElementById('step2');
+    s2.classList.remove('hidden');
+    s2.classList.add('visible');
+    document.getElementById('chosen-tag').textContent = type === 'dj' ? 'Kurs DJ' : 'Kurs Produkcji';
+  }
+
+  function goBack() {
+    document.getElementById('step2').classList.add('hidden');
+    document.getElementById('step2').classList.remove('visible');
+    document.getElementById('step1').classList.remove('hidden');
+  }
+
+  function toggleMsg() {
+    const ta = document.getElementById('optional-msg');
+    ta.classList.toggle('hidden');
+    if (!ta.classList.contains('hidden')) ta.focus();
+  }
+</script>
+</body>
+</html>
