@@ -978,6 +978,32 @@
       color: var(--yellow);
     }
 
+    /* ── FLOAT CTA ── */
+    .float-cta {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      border-radius: 100px;
+      text-decoration: none;
+      box-shadow: 0 4px 24px rgba(212,255,0,0.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .float-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(212,255,0,0.5);
+    }
+
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--black); }
@@ -1336,74 +1362,36 @@
   <div class="inner">
     <p class="section-label">Umów rozmowę</p>
     <h2 class="section-title">ZACZNIJ JUŻ TERAZ</h2>
-    <p class="section-desc contact-desc">Wypełnij formularz i odbierz darmową lekcję 0, a my skontaktujemy się z Tobą!</p>
+    <p class="section-desc contact-desc">Zostaw numer — oddzwonimy i opowiemy wszystko. Pierwsza lekcja <strong style="color:var(--yellow)">gratis</strong>.</p>
 
     <div class="form-stepper">
-
-      <!-- KROK 1 -->
-      <div class="form-step" id="step1">
-        <p class="step-label">Krok 1 z 2 — wybierz kurs</p>
-        <div class="course-choice">
-          <button class="choice-card" onclick="chooseStep('dj')">
-            <svg viewBox="0 0 48 32" fill="none" stroke="currentColor" stroke-width="1.4" style="width:48px;height:32px;stroke:var(--yellow)">
-              <rect x="1" y="1" width="46" height="30" rx="3"/>
-              <rect x="5" y="5" width="16" height="10" rx="1.5"/>
-              <line x1="7" y1="10" x2="7" y2="12"/><line x1="9" y1="8" x2="9" y2="12"/><line x1="11" y1="9" x2="11" y2="12"/><line x1="13" y1="7" x2="13" y2="12"/><line x1="15" y1="9" x2="15" y2="12"/><line x1="17" y1="8" x2="17" y2="12"/>
-              <rect x="5" y="18" width="4" height="2.5" rx="0.5"/><rect x="11" y="18" width="4" height="2.5" rx="0.5"/>
-              <rect x="5" y="22" width="4" height="2.5" rx="0.5"/><rect x="11" y="22" width="4" height="2.5" rx="0.5"/>
-              <circle cx="35" cy="16" r="12"/><circle cx="35" cy="16" r="7"/><circle cx="35" cy="16" r="2" fill="currentColor"/>
-              <line x1="35" y1="3" x2="35" y2="5"/><line x1="35" y1="27" x2="35" y2="29"/><line x1="22" y1="16" x2="24" y2="16"/><line x1="46" y1="16" x2="48" y2="16"/>
-            </svg>
-            <span class="choice-title">Kurs DJ</span>
-            <span class="choice-sub">Podstawowy · Rozszerzony</span>
-          </button>
-          <button class="choice-card" onclick="chooseStep('produkcja')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            <span class="choice-title">Kurs Produkcji</span>
-            <span class="choice-sub">Ableton · Podstawowy · Zaawansowany</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- KROK 2 -->
-      <div class="form-step hidden" id="step2">
-        <div class="step2-header">
-          <button class="back-btn" onclick="goBack()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polyline points="15 18 9 12 15 6"/></svg>
-            Wróć
-          </button>
-          <p class="step-label">Krok 2 z 2 — Twoje dane</p>
-          <span class="chosen-tag" id="chosen-tag"></span>
-        </div>
-        <form class="form-simple" onsubmit="return false">
+      <div id="form-main">
+        <form class="form-simple" action="https://formspree.io/f/TWOJE_ID" method="POST" onsubmit="handleSubmit(event)">
           <div class="form-group">
             <label>Imię</label>
-            <input type="text" placeholder="Jan" />
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" placeholder="jan@example.com" />
+            <input type="text" name="imie" placeholder="Jan" required />
           </div>
           <div class="form-group">
             <label>Telefon</label>
-            <input type="tel" placeholder="+48 000 000 000" />
+            <input type="tel" name="telefon" placeholder="600 000 000" required />
           </div>
-          <div class="form-group">
-            <label>Preferowana godzina kontaktu</label>
-            <input type="text" placeholder="np. 10:00–13:00" />
-          </div>
-          <div class="form-group msg-toggle-wrap">
-            <button type="button" class="msg-toggle" onclick="toggleMsg()">+ Dodaj wiadomość (opcjonalnie)</button>
-            <textarea id="optional-msg" class="hidden" placeholder="Napisz coś o sobie lub zadaj pytanie..."></textarea>
-          </div>
-          <button type="submit" class="btn-primary form-btn">Chcę poznać szczegóły — oddzwonimy!</button>
-          <p class="form-note">Nie wysyłamy spamu. Oddzwonimy w ciągu 24h.</p>
+          <button type="submit" class="btn-primary form-btn">Chcę darmową lekcję — oddzwońcie!</button>
+          <p class="form-note">Oddzwonimy w ciągu 24h. Bez spamu, bez zobowiązań.</p>
         </form>
       </div>
-
+      <div id="form-thanks" class="hidden" style="text-align:center; padding: 48px 0;">
+        <p style="font-family:'Bebas Neue',sans-serif; font-size:48px; color:var(--yellow); letter-spacing:2px;">Gotowe!</p>
+        <p style="color:#aaa; margin-top:16px; line-height:1.7;">Oddzwonimy do Ciebie wkrótce.<br>Do zobaczenia w klubie!</p>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- FLOATING CALL BUTTON -->
+<a href="tel:+48TWOJNUMER" class="float-cta">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.82-.82a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  Zadzwoń teraz
+</a>
 
 <!-- FOOTER -->
 <footer>
@@ -1434,31 +1422,17 @@
     });
   }
 
-  function switchLoc(btn, id) {
-    document.querySelectorAll('.loc-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.loc-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById(id).classList.add('active');
-  }
-
-  function chooseStep(type) {
-    document.getElementById('step1').classList.add('hidden');
-    const s2 = document.getElementById('step2');
-    s2.classList.remove('hidden');
-    s2.classList.add('visible');
-    document.getElementById('chosen-tag').textContent = type === 'dj' ? 'Kurs DJ' : 'Kurs Produkcji';
-  }
-
-  function goBack() {
-    document.getElementById('step2').classList.add('hidden');
-    document.getElementById('step2').classList.remove('visible');
-    document.getElementById('step1').classList.remove('hidden');
-  }
-
-  function toggleMsg() {
-    const ta = document.getElementById('optional-msg');
-    ta.classList.toggle('hidden');
-    if (!ta.classList.contains('hidden')) ta.focus();
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+      if (res.ok) {
+        document.getElementById('form-main').classList.add('hidden');
+        document.getElementById('form-thanks').classList.remove('hidden');
+      }
+    } catch(err) {}
   }
 </script>
 </body>
