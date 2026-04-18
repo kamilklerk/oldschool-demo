@@ -978,6 +978,39 @@
       color: var(--yellow);
     }
 
+    /* ── FAQ ── */
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: 'Space Mono', monospace;
+      font-size: 15px;
+      font-weight: 700;
+      text-align: left;
+      padding: 24px 0;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: color .2s;
+    }
+    .faq-q:hover { color: var(--yellow); }
+    .faq-arrow { font-size: 20px; flex-shrink: 0; transition: transform .3s; color: var(--yellow); }
+    .faq-q.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #aaa;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, padding .35s ease;
+      padding: 0;
+    }
+    .faq-a.open { max-height: 300px; padding-bottom: 24px; }
+
     /* ── FLOAT CTA ── */
     .float-cta {
       position: fixed;
@@ -1405,6 +1438,60 @@
 </section>
 
 <!-- FLOATING CALL BUTTON -->
+<!-- FAQ -->
+<section id="faq" style="max-width:100%; border-top:1px solid var(--border);">
+  <div style="max-width:720px; margin:0 auto;">
+    <p class="section-label">FAQ</p>
+    <h2 class="section-title">CZĘSTE PYTANIA</h2>
+    <div style="margin-top:48px; display:flex; flex-direction:column; gap:2px;" id="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Który kurs wybrać — podstawowy czy rozszerzony?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          Jeśli traktujesz to poważnie — rozszerzony. Dostajesz pełną technikę, nagranie demo setu i <strong>prawdziwy występ w klubie</strong>. Kurs podstawowy to dobry start, ale większość kursantów i tak wraca po więcej. Kurs rozszerzony jest też tańszy za godzinę — 75 zł vs 87 zł.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Czy muszę mieć własny sprzęt w domu?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          Nie musisz. Zajęcia odbywają się w klubie Drugi Dom na profesjonalnym sprzęcie. Jeśli chcesz ćwiczyć między zajęciami, mamy dostęp do zaprzyjaźnionego studia, które możesz wynająć na godziny w korzystnej cenie.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Czy mogę zapłacić w ratach?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          Tak, mamy opcję płatności ratalnych. Szczegóły ustalamy indywidualnie — najlepiej zadzwoń lub zostaw numer, oddzwonimy i wszystko wyjaśnimy.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Czy muszę mieć jakieś doświadczenie?
+          <span class="faq-arrow">↓</span>
+        </button>
+        <div class="faq-a">
+          Zero doświadczenia wymagane. Wszystkie kursy prowadzimy od absolutnego zera. Pierwsza lekcja jest bezpłatna — możesz sprawdzić czy to dla Ciebie zanim podejmiesz decyzję.
+        </div>
+      </div>
+
+    </div>
+    <div style="text-align:center; margin-top:48px;">
+      <a href="#contact" class="btn-primary">Mam więcej pytań — oddzwońcie do mnie</a>
+    </div>
+  </div>
+</section>
+
 <a href="tel:+48TWOJNUMER" class="float-cta">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.82-.82a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
   Zadzwoń teraz
@@ -1437,6 +1524,13 @@
       if (f) f.style.display = t === id ? '' : 'none';
       if (p) p.style.display = t === id ? '' : 'none';
     });
+  }
+
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
+    if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
   }
 
   async function handleSubmit(e) {
