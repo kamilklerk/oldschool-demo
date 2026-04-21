@@ -1465,7 +1465,7 @@
           </div>
           <div class="form-group">
             <label>Telefon</label>
-            <input type="tel" name="telefon" placeholder="600 000 000" required />
+            <input type="tel" name="telefon" placeholder="600 000 000" required pattern="[0-9+\s]{9,13}" minlength="9" maxlength="13" oninvalid="this.setCustomValidity('Podaj prawidłowy numer telefonu (9–13 cyfr, bez liter)')" oninput="this.setCustomValidity('')" />
           </div>
           <button type="submit" class="btn-primary form-btn">Odbierz lekcję 0 — oddzwońcie!</button>
           <p class="form-note">Oddzwonimy w ciągu 24h. Bez spamu, bez zobowiązań.</p>
