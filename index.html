@@ -1386,17 +1386,25 @@
         <a href="#contact" class="btn-secondary">Dowiedz się więcej</a>
       </div>
 
-      <div class="course-card">
-        <p class="course-level">Custom</p>
-        <h3 class="course-name">Indywid&shy;ualny</h3>
-        <p class="course-hours">Ustalamy razem</p>
-        <ul class="course-features">
-          <li>Program dopasowany do Ciebie</li>
-          <li>Elastyczny harmonogram</li>
-          <li>Jeden na jeden z instruktorem</li>
-          <li>Intensywny kurs w krótkim czasie</li>
-        </ul>
-        <a href="#contact" class="btn-secondary">Zapytaj o cenę</a>
+      <div style="width:100%; margin-top:12px;">
+        <button onclick="toggleIndywidualny(this)" style="background:transparent;border:1px solid #2a2a2a;color:#666;padding:12px 24px;border-radius:8px;cursor:pointer;font-family:'Space Mono',monospace;font-size:13px;width:100%;text-align:left;display:flex;justify-content:space-between;align-items:center;">
+          <span>Szukasz czegoś innego? Plan indywidualny</span>
+          <span class="indyw-arrow">▼</span>
+        </button>
+        <div id="indywidualny-card" style="display:none;margin-top:8px;">
+          <div class="course-card">
+            <p class="course-level">Custom</p>
+            <h3 class="course-name">Indywid&shy;ualny</h3>
+            <p class="course-hours">Ustalamy razem</p>
+            <ul class="course-features">
+              <li>Program dopasowany do Ciebie</li>
+              <li>Elastyczny harmonogram</li>
+              <li>Jeden na jeden z instruktorem</li>
+              <li>Intensywny kurs w krótkim czasie</li>
+            </ul>
+            <a href="#contact" class="btn-secondary">Zapytaj o cenę</a>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1573,6 +1581,14 @@
     const isOpen = btn.classList.contains('open');
     document.querySelectorAll('.faq-q').forEach(q => { q.classList.remove('open'); q.nextElementSibling.classList.remove('open'); });
     if (!isOpen) { btn.classList.add('open'); answer.classList.add('open'); }
+  }
+
+  function toggleIndywidualny(btn) {
+    const card = document.getElementById('indywidualny-card');
+    const arrow = btn.querySelector('.indyw-arrow');
+    const visible = card.style.display !== 'none';
+    card.style.display = visible ? 'none' : 'block';
+    arrow.textContent = visible ? '▼' : '▲';
   }
 
   async function handleSubmit(e) {
