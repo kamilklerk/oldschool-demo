@@ -605,6 +605,8 @@
       margin-top: 1px;
     }
 
+    .course-features li.no-check::before { content: ''; display: none; }
+
     .course-tabs {
       display: flex;
       gap: 6px;
@@ -1336,18 +1338,18 @@
           <li>Obsługa sprzętu i podstawy miksowania</li>
           <li>Nauka synchronizowania rytmu</li>
           <li>Start w DJ-ingu</li>
-          <li style="color:#555; list-style:none; padding-left:0">❌ Miksowanie po harmonii</li>
-          <li style="color:#555; list-style:none; padding-left:0">❌ Budowanie setu</li>
-          <li style="color:#555; list-style:none; padding-left:0">❌ Występ w klubie</li>
+          <li class="no-check" style="color:#555">❌ Miksowanie po harmonii</li>
+          <li class="no-check" style="color:#555">❌ Budowanie setu</li>
+          <li class="no-check" style="color:#555">❌ Występ w klubie</li>
           <li><strong>Płatności ratalne</strong></li>
         </ul>
         <ul class="course-features" id="features-basic-vinyl" style="display:none">
           <li>Obsługa gramofonów i podstawy miksowania</li>
           <li>Nauka synchronizowania rytmu</li>
           <li>Start w DJ-ingu</li>
-          <li style="color:#555; list-style:none; padding-left:0">❌ Miksowanie po harmonii</li>
-          <li style="color:#555; list-style:none; padding-left:0">❌ Budowanie setu</li>
-          <li style="color:#555; list-style:none; padding-left:0">❌ Występ w klubie</li>
+          <li class="no-check" style="color:#555">❌ Miksowanie po harmonii</li>
+          <li class="no-check" style="color:#555">❌ Budowanie setu</li>
+          <li class="no-check" style="color:#555">❌ Występ w klubie</li>
           <li><strong>Płatności ratalne</strong></li>
         </ul>
         <a href="#contact" class="btn-secondary">Dowiedz się więcej</a>
