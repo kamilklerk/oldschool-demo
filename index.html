@@ -1282,14 +1282,48 @@
   <div class="inner">
     <div class="header">
       <p class="section-label">Oferta kursów</p>
-      <h2 class="section-title">Wybierz kurs dla Ciebie</h2>
+      <h2 class="section-title">Wybierz swoją ścieżkę</h2>
       <p class="section-desc courses-note">* wszystkie kursy prowadzimy od zera — nie musisz mieć doświadczenia</p>
     </div>
     <div class="courses-grid">
 
-      <div class="course-card">
-        <p class="course-level">Kurs podstawowy</p>
-        <h3 class="course-name">DJ</h3>
+      <div class="course-card featured" style="order:-1">
+        <span class="featured-tag">Najczęściej wybierany</span>
+        <p class="course-level">Kurs DJ PRO — pełna wersja</p>
+        <h3 class="course-name">DJ PRO</h3>
+        <div class="course-tabs">
+          <button class="course-tab active" onclick="switchTab(this, 'adv-digital', 'adv')">Digital</button>
+          <button class="course-tab" onclick="switchTab(this, 'adv-vinyl', 'adv')">Vinyl</button>
+        </div>
+        <p class="course-hours" id="hours-adv-digital">52 godziny zajęć</p>
+        <p class="course-hours" id="hours-adv-vinyl" style="display:none">52 godziny zajęć</p>
+        <p class="course-price">75 zł/h</p>
+        <ul class="course-features" id="features-adv-digital">
+          <li>Nauka od zera — pełna technika miksowania</li>
+          <li>Miksowanie po harmonii — muzyka która pasuje do siebie</li>
+          <li>Jak budować set — energia i flow</li>
+          <li>Efekty, loopy, narzędzia sceniczne</li>
+          <li>Nagranie własnego demo setu</li>
+          <li>Jak promować się w social mediach</li>
+          <li><strong>Gwarantowany występ w klubie</strong></li>
+          <li><strong>Płatności ratalne</strong></li>
+        </ul>
+        <ul class="course-features" id="features-adv-vinyl" style="display:none">
+          <li>Nauka od zera — pełna technika miksowania</li>
+          <li>Miksowanie po harmonii — muzyka która pasuje do siebie</li>
+          <li>Jak budować set — energia i flow</li>
+          <li>Efekty, loopy, narzędzia sceniczne</li>
+          <li>Nagranie własnego demo setu</li>
+          <li>Jak promować się w social mediach</li>
+          <li><strong>Gwarantowany występ w klubie</strong></li>
+          <li><strong>Płatności ratalne</strong></li>
+        </ul>
+        <a href="#contact" class="btn-primary">Chcę kurs PRO — odbierz lekcję 0</a>
+      </div>
+
+      <div class="course-card" style="opacity:0.75">
+        <p class="course-level">Kurs DJ START — tylko podstawy</p>
+        <h3 class="course-name">DJ START</h3>
         <div class="course-tabs">
           <button class="course-tab active" onclick="switchTab(this, 'basic-digital', 'basic')">Digital</button>
           <button class="course-tab" onclick="switchTab(this, 'basic-vinyl', 'basic')">Vinyl</button>
@@ -1299,52 +1333,24 @@
         <p class="course-price" id="price-basic-digital">87 zł/h</p>
         <p class="course-price" id="price-basic-vinyl" style="display:none">87 zł/h</p>
         <ul class="course-features" id="features-basic-digital">
-          <li>Obsługa mixera i CDJ</li>
-          <li>BPM matching</li>
-          <li>Podstawy miksowania</li>
+          <li>Obsługa sprzętu i podstawy miksowania</li>
+          <li>Nauka synchronizowania rytmu</li>
+          <li>Start w DJ-ingu</li>
+          <li style="color:#555; text-decoration:line-through">Miksowanie po harmonii</li>
+          <li style="color:#555; text-decoration:line-through">Budowanie setu</li>
+          <li style="color:#555; text-decoration:line-through">Występ w klubie</li>
           <li><strong>Płatności ratalne</strong></li>
         </ul>
         <ul class="course-features" id="features-basic-vinyl" style="display:none">
-          <li>Obsługa gramofonów i mixera</li>
-          <li>BPM matching</li>
-          <li>Podstawy miksowania</li>
+          <li>Obsługa gramofonów i podstawy miksowania</li>
+          <li>Nauka synchronizowania rytmu</li>
+          <li>Start w DJ-ingu</li>
+          <li style="color:#555; text-decoration:line-through">Miksowanie po harmonii</li>
+          <li style="color:#555; text-decoration:line-through">Budowanie setu</li>
+          <li style="color:#555; text-decoration:line-through">Występ w klubie</li>
           <li><strong>Płatności ratalne</strong></li>
         </ul>
         <a href="#contact" class="btn-secondary">Dowiedz się więcej</a>
-      </div>
-
-      <div class="course-card featured">
-        <span class="featured-tag">Polecany</span>
-        <p class="course-level">Kurs rozszerzony</p>
-        <h3 class="course-name">DJ</h3>
-        <div class="course-tabs">
-          <button class="course-tab active" onclick="switchTab(this, 'adv-digital', 'adv')">Digital</button>
-          <button class="course-tab" onclick="switchTab(this, 'adv-vinyl', 'adv')">Vinyl</button>
-        </div>
-        <p class="course-hours" id="hours-adv-digital">52 godziny zajęć</p>
-        <p class="course-hours" id="hours-adv-vinyl" style="display:none">52 godziny zajęć</p>
-        <p class="course-price">75 zł/h</p>
-        <ul class="course-features" id="features-adv-digital">
-          <li>Pełna technika miksowania</li>
-          <li>Harmonic mixing i key mixing</li>
-          <li>Budowanie setu — narracja i energia</li>
-          <li>Praca z efektami i loopami</li>
-          <li>Nagranie demo setu</li>
-          <li>Obsługa social mediów</li>
-          <li><strong>Występ w klubie</strong></li>
-          <li><strong>Płatności ratalne</strong></li>
-        </ul>
-        <ul class="course-features" id="features-adv-vinyl" style="display:none">
-          <li>Pełna technika miksowania</li>
-          <li>Harmonic mixing i key mixing</li>
-          <li>Budowanie setu — narracja i energia</li>
-          <li>Praca z efektami i loopami</li>
-          <li>Nagranie demo setu</li>
-          <li>Obsługa social mediów</li>
-          <li><strong>Występ w klubie</strong></li>
-          <li><strong>Płatności ratalne</strong></li>
-        </ul>
-        <a href="#contact" class="btn-primary">Dowiedz się więcej</a>
       </div>
 
       <div class="course-card">
