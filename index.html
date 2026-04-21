@@ -1579,9 +1579,9 @@
     e.preventDefault();
     const form = e.target;
     const fd = new FormData(form);
-    const payload = { imie: fd.get('imie'), telefon: fd.get('telefon') };
+    const params = new URLSearchParams({ imie: fd.get('imie'), telefon: fd.get('telefon') });
     try {
-      await fetch(form.action, { method: 'POST', body: JSON.stringify(payload), headers: { 'Content-Type': 'application/json' } });
+      await fetch(form.action, { method: 'POST', body: params });
     } catch(err) {}
     document.getElementById('form-main').classList.add('hidden');
     document.getElementById('form-thanks').classList.remove('hidden');
