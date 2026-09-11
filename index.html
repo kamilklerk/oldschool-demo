@@ -1443,6 +1443,14 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
+      .form-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      .form-inner > div:first-child { order: 2; }
+      .form-inner > div:last-child  { order: 1; }
+    }
+    @media (max-width: 900px) {
       body { padding-bottom: 52px; }
 
       nav { padding: 0 1.25rem; }
