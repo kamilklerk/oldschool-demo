@@ -87,6 +87,7 @@
     }
 
     .nav-logo { text-decoration: none; display: flex; align-items: center; }
+    .hamburger { display: none; }
     .nav-logo-img { height: 64px; width: auto; }
 
     .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
@@ -1459,6 +1460,51 @@
         display: none;
       }
 
+      .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+        z-index: 1001;
+      }
+      .hamburger span {
+        display: block;
+        height: 2px;
+        background: var(--text);
+        border-radius: 2px;
+        transition: all 0.25s;
+      }
+      .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .hamburger.open span:nth-child(2) { opacity: 0; }
+      .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: var(--bg);
+        z-index: 999;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2.5rem;
+      }
+      .mobile-menu.open { display: flex; }
+      .mobile-menu a {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 1.5rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
       .nav-cta-mobile {
         display: flex;
         align-items: center;
@@ -1591,6 +1637,9 @@
     <a href="#hero" class="nav-logo">
       <img src="assets/logo.png" alt="Old School DJ" class="nav-logo-img" />
     </a>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="#journey">Program</a></li>
       <li><a href="#opinie">Opinie</a></li>
@@ -1598,6 +1647,14 @@
       <li><a href="#faq">FAQ</a></li>
     </ul>
   </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#journey" class="menu-link">Program</a>
+    <a href="#opinie" class="menu-link">Opinie</a>
+    <a href="#courses" class="menu-link">Kursy</a>
+    <a href="#faq" class="menu-link">FAQ</a>
+  </div>
 
   <!-- HERO -->
   <section id="hero">
@@ -2033,6 +2090,24 @@
       }, { threshold: 0.1 });
       obs.observe(kontakt);
     })();
+
+    // Hamburger menu
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburgerBtn && mobileMenu) {
+      hamburgerBtn.addEventListener('click', () => {
+        hamburgerBtn.classList.toggle('open');
+        mobileMenu.classList.toggle('open');
+        document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+      });
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburgerBtn.classList.remove('open');
+          mobileMenu.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
 
     // Smooth scroll offset for fixed nav
     document.querySelectorAll('a[href^="#"]').forEach(a => {
