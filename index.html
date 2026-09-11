@@ -189,12 +189,80 @@
     }
 
     .hero-guarantee {
-      font-size: 0.78rem;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-pills {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      border: 1px solid var(--border-mid);
+      padding: 6px 14px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .hero-guarantee-block {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(196,30,30,0.12);
+      border: 1px solid rgba(196,30,30,0.35);
+      padding: 10px 22px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-guarantee-star {
+      color: var(--red-bright);
+      font-size: 1rem;
+    }
+
+    .hero-guarantee-text {
+      font-size: 0.75rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--red-bright);
-      margin-bottom: 2.5rem;
+    }
+
+    .hero-scarcity {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-top: -2.75rem;
+      margin-bottom: 3rem;
+    }
+
+    .stats-headline {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      width: 100%;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      flex-wrap: wrap;
     }
 
     @keyframes pulse {
@@ -243,8 +311,9 @@
 
     .hero-stats {
       display: flex;
-      gap: 3rem;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
       padding-top: 2.5rem;
       border-top: 1px solid var(--border);
       flex-wrap: wrap;
@@ -310,6 +379,205 @@
       line-height: 1.7;
       color: var(--muted);
       max-width: 520px;
+    }
+
+    /* ─── JOURNEY OUTCOMES & PATH ─── */
+    .journey-outcomes {
+      max-width: 860px;
+      margin: 0 auto 3rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+    }
+
+    .journey-outcomes-title {
+      font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 1.25rem;
+    }
+
+    .journey-outcomes-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .journey-outcomes-list li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+
+    .journey-outcomes-list li::before {
+      content: '✓';
+      color: var(--red-bright);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .journey-path {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 auto 3rem;
+      max-width: 860px;
+    }
+
+    .journey-path-step {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border-mid);
+      padding: 8px 14px;
+      background: var(--card);
+    }
+
+    .journey-path-step.active {
+      color: var(--red-bright);
+      border-color: rgba(196,30,30,0.4);
+      background: rgba(196,30,30,0.1);
+    }
+
+    .journey-path-arrow {
+      color: var(--border-mid);
+      font-size: 1rem;
+    }
+
+    /* ─── TUTORIALE SECTION ─── */
+    #tutoriale {
+      background: var(--red);
+      padding: 5rem 2.5rem;
+      text-align: center;
+    }
+
+    .tutoriale-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .tutoriale-line1 {
+      font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      color: rgba(255,255,255,0.55);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+
+    .tutoriale-line2 {
+      font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.75rem, 4vw, 3rem);
+      color: #fff;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    /* ─── NIGDY NIE GRAŁEŚ ─── */
+    #nigdy {
+      border-top: 1px solid var(--border);
+    }
+
+    .nigdy-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .nigdy-title {
+      font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      color: var(--text);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .nigdy-subtitle {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .nigdy-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .nigdy-point {
+      background: var(--card);
+      padding: 2rem 1.75rem;
+    }
+
+    .nigdy-point-num {
+      font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+      font-weight: 900;
+      font-size: 2.5rem;
+      color: var(--border-mid);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.04em;
+    }
+
+    .nigdy-point h4 {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .nigdy-point p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── STICKY CTA (mobile) ─── */
+    .sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 200;
+      background: var(--red);
+      padding: 0;
+    }
+
+    .sticky-cta a {
+      display: block;
+      text-align: center;
+      font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 24px;
+    }
+
+    @media (max-width: 900px) {
+      .sticky-cta { display: block; }
+      .nigdy-points { grid-template-columns: 1fr; }
     }
 
     /* ─── STEPS / JOURNEY ─── */
@@ -721,18 +989,17 @@
     }
 
     .course-guarantee {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      display: block;
       background: rgba(196,30,30,0.12);
-      border: 1px solid rgba(196,30,30,0.3);
-      padding: 8px 16px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      border: 1px solid rgba(196,30,30,0.35);
+      padding: 14px 20px;
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--red-bright);
       margin-bottom: 1.5rem;
+      text-align: center;
     }
 
     .course-cta {
@@ -1176,6 +1443,8 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
+      body { padding-bottom: 52px; }
+
       nav { padding: 0 1.25rem; }
 
       .nav-links {
@@ -1340,7 +1609,14 @@
       <h1 class="hero-headline">ZOSTAŃ DJ-EM<br>W <em>3 MIESIĄCE</em></h1>
       <p class="hero-subtitle">ZAGRAJ SWÓJ PIERWSZY SET W KLUBIE.</p>
 
-      <p class="hero-desc">Zaczynasz od zera. W 13 tygodni nauczysz się miksować, zbudujesz swój pierwszy set i zagrasz na profesjonalnym klubowym sprzęcie.</p>
+      <p class="hero-desc">Żadnego doświadczenia, żadnego własnego sprzętu. W 13 tygodniach nauczysz się miksować, zbudujesz swój set i zagrasz go na żywo w prawdziwym klubie.</p>
+
+      <div class="hero-pills">
+        <span class="hero-pill">13 TYGODNI</span>
+        <span class="hero-pill">52 GODZINY</span>
+        <span class="hero-pill">MAX. 6 OSÓB</span>
+        <span class="hero-pill">GDYNIA</span>
+      </div>
 
       <p class="hero-guarantee">GWARANTOWANY WYSTĘP W KLUBIE</p>
 
@@ -1348,19 +1624,23 @@
         <a href="#kontakt" class="btn-primary">ZAPISZ SIĘ NA LISTĘ OCZEKUJĄCYCH</a>
         <a href="#journey" class="btn-secondary">JAK TO DZIAŁA</a>
       </div>
+      <p class="hero-scarcity">Nowy nabór wkrótce. Tylko 6 miejsc w grupie - zapisz się na listę i dowiedz się jako pierwszy.</p>
 
       <div class="hero-stats">
-        <div class="stat">
-          <div class="stat-number">70+</div>
-          <div class="stat-label">Kursantów</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">800h</div>
-          <div class="stat-label">Lekcji</div>
-        </div>
-        <div class="stat">
-          <div class="stat-number">1 rok</div>
-          <div class="stat-label">Działalności</div>
+        <div class="stats-headline">PONAD 70 OSÓB ZACZĘŁO Z NAMI OD ZERA.</div>
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-number">70+</div>
+            <div class="stat-label">Kursantów</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">800h</div>
+            <div class="stat-label">Lekcji</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">1 rok</div>
+            <div class="stat-label">Działalności</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1375,37 +1655,64 @@
         <p class="section-desc">Nie uczysz się teorii na sucho. Każdy krok prowadzi prosto do momentu, gdy stoisz za konsolą w klubie.</p>
       </div>
 
+      <!-- CO BĘDZIESZ POTRAFIĆ -->
+      <div class="journey-outcomes">
+        <h3 class="journey-outcomes-title">CO BĘDZIESZ POTRAFIĆ PO 13 TYGODNIACH?</h3>
+        <ul class="journey-outcomes-list">
+          <li>Miksować płynnie na najnowszym sprzęcie w standardach klubowych</li>
+          <li>Czytać parkiet i budować energię setu od początku do końca</li>
+          <li>Tworzyć własny repertuar i grać w swoim stylu</li>
+          <li>Przygotować i zagrać pełny set na żywo przed publicznością</li>
+          <li>Wiedzieć jak zdobywać pierwsze bookingi i budować wizerunek jako DJ</li>
+        </ul>
+      </div>
+
+      <!-- VISUAL PATH -->
+      <div class="journey-path">
+        <div class="journey-path-step">START</div>
+        <div class="journey-path-arrow">→</div>
+        <div class="journey-path-step">PODSTAWY</div>
+        <div class="journey-path-arrow">→</div>
+        <div class="journey-path-step">MIKSOWANIE</div>
+        <div class="journey-path-arrow">→</div>
+        <div class="journey-path-step">WŁASNY STYL</div>
+        <div class="journey-path-arrow">→</div>
+        <div class="journey-path-step">WŁASNY SET</div>
+        <div class="journey-path-arrow">→</div>
+        <div class="journey-path-step active">WYSTĘP W KLUBIE</div>
+      </div>
+
       <div class="steps-list">
         <div class="step-item">
           <div class="step-num">01</div>
           <div class="step-body">
-            <div class="step-tag">Tygodnie 1–3</div>
+            <div class="step-tag">Tygodnie 1-3</div>
             <h3 class="step-title">Pierwsze kroki na sprzęcie</h3>
-            <p class="step-desc">Od razu siadasz za Pioneer CDJ-3000 i DJM-900 NXS2. Uczysz się podstaw beatmatchingu, struktury tracków i prostych przejść. Żadnych "ćwiczeń na sucho" - od pierwszej lekcji pracujesz na tym samym sprzęcie, co profesjonalni DJ-e.</p>
+            <p class="step-desc">Od pierwszej lekcji pracujesz na sprzęcie w standardach klubowych. Poznajesz beatmatching, strukturę utworów i podstawowe przejścia.</p>
           </div>
         </div>
         <div class="step-item">
           <div class="step-num">02</div>
           <div class="step-body">
-            <div class="step-tag">Tygodnie 4–7</div>
+            <div class="step-tag">Tygodnie 4-7</div>
             <h3 class="step-title">Budujesz warsztat miksowania</h3>
-            <p class="step-desc">Phrasingowanie, praca z kluczami, EQ mixing, efekty. Uczysz się czytać parkiet i układać energię setu. Zaczynaś rozróżniać style i rozumieć, dlaczego jedne przejścia działają, a inne nie.</p>
+            <p class="step-desc">Phrasingowanie, praca z kluczami, EQ mixing i efekty. Uczysz się czytać parkiet i budować energię setu.</p>
           </div>
         </div>
         <div class="step-item">
           <div class="step-num">03</div>
           <div class="step-body">
-            <div class="step-tag">Tygodnie 8–10</div>
+            <div class="step-tag">Tygodnie 8-10</div>
             <h3 class="step-title">Tworzysz swój własny styl</h3>
-            <p class="step-desc">Uczysz się wybierać muzykę, która pasuje do Ciebie i budować z niej własne sety. Z czasem wiesz już nie tylko, jak miksować, ale też co chcesz grać i jak chcesz brzmieć jako DJ.</p>
+            <p class="step-desc">Uczysz się wybierać muzykę, budować własny repertuar i tworzyć sety w swoim stylu.</p>
           </div>
         </div>
         <div class="step-item">
           <div class="step-num">04</div>
           <div class="step-body">
-            <div class="step-tag">Tygodnie 11–12</div>
+            <div class="step-tag">Tygodnie 11-12</div>
             <h3 class="step-title">Egzamin - przepustka do klubu</h3>
-            <p class="step-desc">Grasz swój set przed instruktorem. To egzamin, który uprawnia Cię do zagrania na prawdziwej imprezie w klubie. Nie chodzi o perfekcję - chodzi o gotowość. Jeśli jesteś gotowy, dostajesz zielone światło.</p>
+            <p class="step-desc">Grasz swój set przed instruktorem. Jeśli jesteś gotowy, dostajesz zielone światło do zagrania na prawdziwej imprezie.</p>
           </div>
         </div>
         <div class="step-item highlight">
@@ -1413,11 +1720,19 @@
           <div class="step-body">
             <div class="step-tag">Tydzień 13 - Finał</div>
             <h3 class="step-title">PEŁNA GOTOWOŚĆ.<br>PIERWSZE GRANIE.</h3>
-            <p class="step-desc">Ostatni tydzień to nie tylko muzyka - to kompletny starter pack DJ-a. Uczysz się jak budować wizerunek w sieci, jak zdobywać pierwsze bookingi, jak wyceniać swój set i gdzie szukać eventów. Wychodzisz z kursu z gotowym planem na to, co dalej.</p>
-            <p class="step-desc" style="margin-top:0.75rem;">A na koniec - dostajesz od nas propozycję zagrania na imprezie. Nie jako obietnica. Jako pierwsze zlecenie.</p>
+            <p class="step-desc">Przygotowujesz się do startu jako DJ: wizerunek, pierwsze bookingi, wycena setu i szukanie eventów.</p>
+            <p class="step-desc" style="margin-top:0.75rem;">A na koniec dostajesz od nas propozycję zagrania na imprezie - <strong>nie jako obietnicę. Jako pierwsze zlecenie.</strong></p>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- TUTORIALE -->
+  <section id="tutoriale">
+    <div class="tutoriale-inner">
+      <p class="tutoriale-line1">NIE KOŃCZYSZ KURSU NA TUTORIALACH.</p>
+      <p class="tutoriale-line2">KOŃCZYSZ GO NA SCENIE.</p>
     </div>
   </section>
 
@@ -1446,7 +1761,7 @@
       <div class="why-inner">
         <div>
           <p class="section-label">Dlaczego Old School</p>
-          <h2 class="section-title">NIE UCZYSZ SIĘ<br>"NA SUCHO".</h2>
+          <h2 class="section-title">DLACZEGO UCZYĆ SIĘ<br>DJ-INGU W OLD SCHOOL?</h2>
           <p class="section-desc" style="margin-bottom: 1.5rem;">Uczysz się od profesjonalistów aktywnie działających na polskiej scenie klubowej od wielu lat. Na tym samym sprzęcie, w tych samych warunkach co DJ-e z prawdziwego zdarzenia.</p>
           <p class="section-desc">Małe grupy (max 6 osób) - instruktor skupiony na Tobie, nie na 15 osobach naraz. Twój postęp jest mierzalny, a cel zawsze jasny.</p>
         </div>
@@ -1469,6 +1784,34 @@
     </div>
   </section>
 
+  <!-- NIGDY NIE GRAŁEŚ -->
+  <section id="nigdy">
+    <div class="section-wrap">
+      <div class="nigdy-inner">
+        <p class="section-label">Dla kogo jest kurs</p>
+        <h2 class="nigdy-title">NIGDY WCZEŚNIEJ<br>NIE GRAŁEŚ?</h2>
+        <p class="nigdy-subtitle">To nie problem. Większość naszych kursantów zaczyna od zera.</p>
+        <div class="nigdy-points">
+          <div class="nigdy-point">
+            <div class="nigdy-point-num">01</div>
+            <h4>Żadnego doświadczenia</h4>
+            <p>Kurs DJ PRO jest zaprojektowany dla osób, które nigdy nie siedziały za konsoletą. Zaczynasz od absolutnych podstaw i budujesz krok po kroku.</p>
+          </div>
+          <div class="nigdy-point">
+            <div class="nigdy-point-num">02</div>
+            <h4>Żadnego własnego sprzętu</h4>
+            <p>Nie musisz kupować nic przed kursem ani w jego trakcie. Wszystko, czego potrzebujesz, czeka na Ciebie w szkole - najnowszy sprzęt w standardach klubowych.</p>
+          </div>
+          <div class="nigdy-point">
+            <div class="nigdy-point-num">03</div>
+            <h4>Żadnego "talentu muzycznego"</h4>
+            <p>DJ-ing to umiejętność, którą można się nauczyć. Wystarczy chęć ćwiczenia i regularność. Resztę zrobimy razem - krok po kroku, przez 13 tygodni.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- COURSES -->
   <section id="courses">
     <div class="section-full">
@@ -1476,7 +1819,7 @@
         <div class="courses-header">
           <p class="section-label">Kurs</p>
           <h2 class="section-title">DJ PRO</h2>
-          
+          <p class="section-desc" style="margin: 0 auto; text-align:center;">ZACZYNASZ OD ZERA. KOŃCZYSZ PIERWSZYM WYSTĘPEM W KLUBIE.</p>
         </div>
 
         <div class="courses-layout">
@@ -1484,29 +1827,24 @@
           <div class="course-card featured">
             <span class="featured-tag">POLECANY</span>
             <div class="course-title">DJ PRO</div>
-            <div class="course-hours">52 godziny · 13 tygodni</div>
-
-            <div class="course-guarantee">
-              <span style="color:var(--red-bright);font-size:1rem;">★</span>
-              GWARANTOWANY WYSTĘP W KLUBIE
-            </div>
+            <div class="course-hours">52 godziny · 13 tygodni · max 6 osób</div>
 
             <p class="course-desc">Pełna droga od zera do pierwszego setu na żywo. Regularny rytm zajęć, budowanie repertuaru, pełny warsztat techniczny i artystyczny - plus gwarantowane zagranie w prawdziwym klubie na zakończenie kursu.</p>
 
             <ul class="course-features">
-              <li>Pioneer CDJ-3000 + DJM-900 NXS2 od pierwszej lekcji</li>
+              <li>Najnowszy sprzęt w standardach klubowych od pierwszej lekcji</li>
               <li>Beatmatching, phrasingowanie, EQ mixing, efekty</li>
               <li>Budowanie własnego repertuaru i stylu</li>
               <li>Przygotowanie i dopracowanie pełnego setu</li>
-              <li>Gwarantowany występ w klubie - koniec kursu</li>
-              <li>Max 6 osób w grupie</li>
-              
+              <li>Max 6 osób w grupie - pełna uwaga instruktora</li>
             </ul>
 
             <div class="course-cta">
               <div class="course-price">3 899 zł</div>
-              <div class="course-price-note">Jednorazowo lub w ratach.</div>
+              <div class="course-price-note">Jednorazowo lub w ratach - dogadamy się.</div>
+              <div class="course-guarantee" style="margin-bottom:1.25rem;">GWARANTOWANY WYSTĘP W KLUBIE</div>
               <a href="#kontakt" class="btn-primary" style="width:100%;text-align:center;">ZAPISZ SIĘ NA LISTĘ OCZEKUJĄCYCH</a>
+              <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;">Nowy nabór wkrótce. Zapisz się na listę, żeby dostać informację o zapisach jako pierwszy.</p>
             </div>
 
             <div class="indyw-toggle" onclick="toggleIndywidualny(this)">
@@ -1583,8 +1921,8 @@
         <div class="form-inner">
           <div>
             <p class="section-label">Lista oczekujących</p>
-            <h2 class="form-info-title">ZAPISZ SIĘ<br>NA LISTĘ<br>OCZEKUJĄCYCH</h2>
-            <p class="form-info-desc">Nowy nabór rusza wkrótce. Zostaw kontakt - odezwiemy się jako pierwsi i zarezerwujemy Ci miejsce. Liczba miejsc ograniczona.</p>
+            <h2 class="form-info-title">DOŁĄCZ DO LISTY<br>OCZEKUJĄCYCH</h2>
+            <p class="form-info-desc">Nowy nabór rusza wkrótce. Zostaw swoje dane, a damy Ci znać jako pierwszemu i skontaktujemy się z Tobą w sprawie kursu.</p>
             <ul class="form-bullets">
               <li>Pierwsze info o nowym naborze</li>
               <li>Gwarantowane miejsce zanim otworzymy zapisy</li>
@@ -1593,16 +1931,19 @@
             </ul>
 
             <div style="margin-top:2rem; padding-top:2rem; border-top:1px solid var(--border);">
-              <p style="font-size:0.72rem;color:var(--muted);margin-bottom:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Kontakt bezpośredni</p>
-              <a href="tel:+48512870822" style="display:block;font-size:1.1rem;font-weight:700;color:var(--text);text-decoration:none;margin-bottom:0.5rem;">+48 512 870 822</a>
+              <p style="font-size:0.72rem;color:var(--muted);margin-bottom:0.75rem;letter-spacing:0.1em;text-transform:uppercase;">Wolisz zadzwonić od razu?</p>
+              <a href="tel:+48512870822" style="display:flex;align-items:center;gap:10px;font-size:1.4rem;font-weight:900;color:var(--text);text-decoration:none;margin-bottom:0.5rem;letter-spacing:-0.01em;">
+                <span style="font-size:1rem;color:var(--red-bright);">📞</span>+48 512 870 822
+              </a>
+              <p style="font-size:0.78rem;color:var(--muted);margin-bottom:1rem;">Dzwonimy też sami - wystarczy zostawić numer w formularzu.</p>
               <a href="https://www.instagram.com/oldschool.dd?igsh=MXNoNjlxOWllc25jaA%3D%3D&utm_source=qr" target="_blank" rel="noopener" style="font-size:0.8rem;color:var(--muted);text-decoration:none;">@oldschool.dd na Instagramie →</a>
             </div>
           </div>
 
           <div>
             <div class="form-card">
-              <div class="form-card-title">Dołącz do listy</div>
-              <div class="form-card-sub">Odezwiemy się jako pierwsi gdy ruszy nabór</div>
+              <div class="form-card-title">DOŁĄCZ DO LISTY OCZEKUJĄCYCH</div>
+              <div class="form-card-sub">Nowy nabór rusza wkrótce. Zostaw dane - odezwiemy się jako pierwsi.</div>
 
               <form id="lead-form" onsubmit="handleSubmit(event)">
                 <div class="form-group">
@@ -1617,21 +1958,15 @@
                   <label for="email">E-mail <span style="color:var(--muted);font-size:0.8em;">(opcjonalnie)</span></label>
                   <input type="email" id="email" name="email" placeholder="twoj@email.pl" />
                 </div>
-                <div class="form-group">
-                  <label for="kurs">Interesuje mnie</label>
-                  <select id="kurs" name="kurs">
-                    <option value="Kurs DJ PRO">Kurs DJ PRO</option>
-                    <option value="Kurs Produkcji Muzyki">Kurs Produkcji Muzyki</option>
-                    <option value="Lekcje indywidualne">Lekcje indywidualne</option>
-                  </select>
-                </div>
-                <button type="submit" class="form-submit">ZAPISZ SIĘ NA LISTĘ OCZEKUJĄCYCH →</button>
+
+                <button type="submit" class="form-submit">CHCĘ DOŁĄCZYĆ DO LISTY</button>
                 <p class="form-disclaimer">Wysyłając formularz zgadzasz się na kontakt w sprawie nowego naboru. Dane nie są przekazywane osobom trzecim.</p>
+                <p class="form-disclaimer" style="margin-top:0.5rem;">Zapis na listę jest bezpłatny i do niczego Cię nie zobowiązuje.</p>
               </form>
 
               <div id="form-success">
-                <h3>Gotowe! Odezwiemy się wkrótce.</h3>
-                <p>Sprawdź skrzynkę e-mail lub telefon - skontaktujemy się w ciągu 24 godzin.</p>
+                <h3>JESTEŚ NA LIŚCIE</h3>
+                <p>Dzięki. Gdy ruszy nowy nabór, damy Ci znać. Możemy też skontaktować się z Tobą telefonicznie, żeby odpowiedzieć na pytania dotyczące kursu.</p>
               </div>
             </div>
           </div>
@@ -1675,7 +2010,7 @@
             Na jakim sprzęcie uczę się podczas kursu?
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-answer">Od pierwszej lekcji grasz na Pioneer CDJ-3000X i DJM-900 NXS2 - profesjonalnym setupie używanym w najlepszych klubach na świecie. Nie ma tu etapu "uczenia się na tańszym sprzęcie" - starty na najlepszym sprzęcie to nasza filozofia.</div>
+          <div class="faq-answer">Od pierwszej lekcji grasz na najnowszym sprzęcie w standardach klubowych - takim samym jak w najlepszych klubach. Nie ma tu etapu "uczenia się na tańszym sprzęcie" - od pierwszej lekcji grasz na tym co liczy się na scenie.</div>
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
@@ -1714,9 +2049,9 @@
     <div class="section-full">
       <div class="final-cta-inner">
         <p class="section-label">Gotowy?</p>
-        <h2 class="final-cta-title">ZAPISZ SIĘ NA<br><em>LISTĘ OCZEKUJĄCYCH.</em></h2>
-        <p class="final-cta-sub">Nowy nabór rusza wkrótce. Wpisz się teraz - miejsca są ograniczone.</p>
-        <a href="#kontakt" class="btn-primary">ZAPISZ SIĘ NA LISTĘ OCZEKUJĄCYCH</a>
+        <h2 class="final-cta-title">DOŁĄCZ DO<br><em>LISTY OCZEKUJĄCYCH.</em></h2>
+        <p class="final-cta-sub">Nowy nabór wkrótce. Zapisz się na listę i dowiedz się jako pierwszy.</p>
+        <a href="#kontakt" class="btn-primary">DOŁĄCZ DO LISTY OCZEKUJĄCYCH</a>
       </div>
     </div>
   </section>
@@ -1735,7 +2070,7 @@
           <li><a href="#opinie">Opinie kursantów</a></li>
           <li><a href="#courses">Kursy i ceny</a></li>
           <li><a href="#faq">Pytania i odpowiedzi</a></li>
-          <li><a href="#kontakt">Lista oczekujących</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
         </ul>
       </div>
       <div>
@@ -1756,6 +2091,11 @@
       </div>
     </div>
   </footer>
+
+  <!-- STICKY MOBILE CTA -->
+  <div class="sticky-cta" id="sticky-cta">
+    <a href="#kontakt">LISTA OCZEKUJĄCYCH - TYLKO 6 MIEJSC</a>
+  </div>
 
   <script>
     function toggleOpinie(btn) {
@@ -1792,7 +2132,6 @@
         imie: form.imie.value,
         telefon: form.telefon.value,
         email: form.email.value,
-        kurs: form.kurs.value,
       };
 
       try {
@@ -1810,6 +2149,17 @@
       form.style.display = 'none';
       document.getElementById('form-success').style.display = 'block';
     }
+
+    // Hide sticky CTA near contact section
+    (function() {
+      const stickyCta = document.getElementById('sticky-cta');
+      const kontakt = document.getElementById('kontakt');
+      if (!stickyCta || !kontakt) return;
+      const obs = new IntersectionObserver(entries => {
+        stickyCta.style.display = entries[0].isIntersecting ? 'none' : '';
+      }, { threshold: 0.1 });
+      obs.observe(kontakt);
+    })();
 
     // Smooth scroll offset for fixed nav
     document.querySelectorAll('a[href^="#"]').forEach(a => {
