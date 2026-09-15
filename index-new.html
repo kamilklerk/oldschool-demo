@@ -117,7 +117,9 @@
 
     /* ─── HERO ─── */
     #hero {
+      height: 100svh;
       min-height: 100svh;
+      max-height: 100svh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -185,7 +187,7 @@
       font-size: 1rem;
       line-height: 1.75;
       color: var(--text);
-      max-width: 520px;
+      max-width: 700px;
       margin: 0 auto 2.5rem;
     }
 
@@ -379,7 +381,7 @@
       font-size: 1rem;
       line-height: 1.7;
       color: var(--muted);
-      max-width: 520px;
+      max-width: 700px;
     }
 
     /* ─── JOURNEY OUTCOMES & PATH ─── */
@@ -536,7 +538,7 @@
       font-size: 2.5rem;
       color: var(--border-mid);
       line-height: 1;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.35rem;
       letter-spacing: -0.04em;
     }
 
@@ -642,7 +644,7 @@
       font-weight: 700;
       font-size: clamp(1.25rem, 2.5vw, 1.75rem);
       color: var(--text);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.35rem;
       letter-spacing: -0.01em;
       line-height: 1.1;
     }
@@ -705,7 +707,7 @@
     .opinie-stars {
       color: var(--red-bright);
       font-size: 0.85rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.35rem;
       letter-spacing: 2px;
     }
 
@@ -1609,6 +1611,108 @@
 
     .indyw-content p:last-child { margin-bottom: 0; }
   
+    /* VISION SECTION */
+    .vision-section {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .vision-img-rotated {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .vision-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(7,4,4,0.45);
+      z-index: 1;
+    }
+    .vision-headline {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      color: var(--text);
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+    }
+    @media (max-width: 900px) {
+      .vision-section { height: 100svh; }
+    }
+
+    /* PHOTO CAPTION SECTION */
+    .photo-caption-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--bg);
+    }
+    .photo-caption-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .photo-caption-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(7,4,4,0.75) 0%,
+        rgba(7,4,4,0.1) 50%,
+        rgba(7,4,4,0) 100%
+      );
+      z-index: 1;
+    }
+    .photo-caption-text {
+      position: absolute;
+      bottom: 3.5rem;
+      left: 3rem;
+      z-index: 2;
+      max-width: 700px;
+      text-align: left;
+      color: var(--text);
+    }
+    .pct-label {
+      font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text);
+      opacity: 0.6;
+      margin-bottom: 0.35rem;
+    }
+    .pct-big {
+      font-size: clamp(1.8rem, 3vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      line-height: 1.05;
+    }
+    @media (max-width: 900px) {
+      .photo-caption-section { height: 85vh; }
+      .photo-caption-text {
+        left: 1.5rem;
+        bottom: 2.5rem;
+        max-width: 85%;
+      }
+    }
+
     .hero-video {
       position: absolute;
       top: 0; left: 0;
@@ -1663,42 +1767,25 @@
     </video>
     <div class="hero-bg"></div>
     <div class="hero-content">
-      <div class="hero-logo-wrap">
-        <img src="assets/logo.png" alt="Old School DJ" class="hero-logo" />
-      </div>
+      <h1 class="hero-headline">STAŃ SIĘ CZĘŚCIĄ<br>KULTURY KLUBOWEJ.</h1>
+      <p class="hero-subtitle">Zobacz, jak to wygląda ↓</p>
+    </div>
+  </section>
 
-      <h1 class="hero-headline">ZOSTAŃ DJ-EM<br>W <em>3 MIESIĄCE</em></h1>
-      <p class="hero-subtitle">ZAGRAJ SWÓJ PIERWSZY SET W KLUBIE.</p>
+  <!-- VISION -->
+  <section class="vision-section">
+    <img src="zdjecia do index-new/9.png" alt="" class="vision-img-rotated" />
+    <div class="vision-overlay"></div>
+    <h2 class="vision-headline">Z PARKIETU<br>ZA DJ-KĘ<br>W 3 MIESIĄCE</h2>
+  </section>
 
-      <p class="hero-desc">Żadnego doświadczenia, żadnego własnego sprzętu. W 13 tygodniach nauczysz się miksować, zbudujesz swój set i zagrasz go na żywo w prawdziwym klubie.</p>
-
-      
-
-      <p class="hero-guarantee">GWARANTOWANY WYSTĘP W KLUBIE</p>
-
-      <div class="hero-buttons">
-        <a href="#kontakt" class="btn-primary">ZAPISZ SIĘ NA LISTĘ OCZEKUJĄCYCH</a>
-        <a href="#journey" class="btn-secondary">JAK TO DZIAŁA</a>
-      </div>
-      <p class="hero-scarcity">Kolejny nabór rusza wkrótce. Zostaw numer - poinformujemy Cię przed oficjalnym startem zapisów.</p>
-
-      <div class="hero-stats">
-        <div class="stats-headline">PONAD 70 OSÓB ZACZĘŁO Z NAMI OD ZERA.</div>
-        <div class="stats-row">
-          <div class="stat">
-            <div class="stat-number">70+</div>
-            <div class="stat-label">Kursantów</div>
-          </div>
-          <div class="stat">
-            <div class="stat-number">800h</div>
-            <div class="stat-label">Lekcji</div>
-          </div>
-          <div class="stat">
-            <div class="stat-number">1 rok</div>
-            <div class="stat-label">Działalności</div>
-          </div>
-        </div>
-      </div>
+  <!-- PHOTO CAPTION -->
+  <section class="photo-caption-section">
+    <img src="zdjecia do index-new/10.jpg" alt="" class="photo-caption-img" />
+    <div class="photo-caption-overlay"></div>
+    <div class="photo-caption-text">
+      <div class="pct-label">Szkoła DJ-ska.</div>
+      <div class="pct-big">W PRAWDZIWYM<br>ŚRODOWISKU KLUBOWYM.</div>
     </div>
   </section>
 
@@ -1936,14 +2023,14 @@
             Ile trwa kurs i jak wyglądają zajęcia w tygodniu?
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-answer">Kurs DJ PRO trwa 13 tygodni i obejmuje 52 godziny zajęć. To 1 spotkanie tygodniowo, 4 godziny. Harmonogram ustalamy indywidualnie - dostosowujemy się do Twojego grafiku, z dostępnością również wieczorami i w weekendy.</div>
+          <div class="faq-answer">Kurs DJ PRO trwa 13 tygodni i obejmuje 52 godziny zajęć. To 1 spotkanie tygodniowo, w godzinach 18-22.</div>
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
             Na jakim sprzęcie uczę się podczas kursu?
             <span class="faq-icon">+</span>
           </button>
-          <div class="faq-answer">Od pierwszej lekcji grasz na najnowszym sprzęcie w standardach klubowych - takim samym jak w najlepszych klubach. Nie ma tu etapu "uczenia się na tańszym sprzęcie" - od pierwszej lekcji grasz na tym co liczy się na scenie.</div>
+          <div class="faq-answer">Od pierwszej lekcji grasz na najnowszym sprzęcie w standardach klubowych - takim samym jak w najlepiej wyposażonych klubach.</div>
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="toggleFaq(this)">
@@ -2089,6 +2176,56 @@
         stickyCta.style.display = entries[0].isIntersecting ? 'none' : '';
       }, { threshold: 0.1 });
       obs.observe(kontakt);
+    })();
+
+    // Snap scroll dla pierwszych 3 sekcji
+    (function() {
+      const snapSecs = ['#hero', '.vision-section', '.photo-caption-section']
+        .map(s => document.querySelector(s)).filter(Boolean);
+      if (!snapSecs.length) return;
+
+      let locked = false;
+
+      function getSnapIndex() {
+        for (let i = snapSecs.length - 1; i >= 0; i--) {
+          if (snapSecs[i].getBoundingClientRect().top <= 50) return i;
+        }
+        return 0;
+      }
+
+      function inSnapZone() {
+        const lastBottom = snapSecs[snapSecs.length - 1].getBoundingClientRect().bottom;
+        return lastBottom > window.innerHeight * 0.4;
+      }
+
+      window.addEventListener('wheel', function(e) {
+        if (!inSnapZone()) return;
+        if (locked) { e.preventDefault(); return; }
+        const idx = getSnapIndex();
+        const goNext = e.deltaY > 0;
+        const target = goNext ? snapSecs[idx + 1] : snapSecs[idx - 1];
+        if (!target) return;
+        e.preventDefault();
+        locked = true;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => { locked = false; }, 900);
+      }, { passive: false });
+
+      let touchStartY = 0;
+      window.addEventListener('touchstart', function(e) {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      window.addEventListener('touchend', function(e) {
+        if (!inSnapZone() || locked) return;
+        const delta = touchStartY - e.changedTouches[0].clientY;
+        if (Math.abs(delta) < 30) return;
+        const idx = getSnapIndex();
+        const target = delta > 0 ? snapSecs[idx + 1] : snapSecs[idx - 1];
+        if (!target) return;
+        locked = true;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => { locked = false; }, 900);
+      }, { passive: true });
     })();
 
     // Hamburger menu
