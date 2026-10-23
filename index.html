@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+  <!-- Start cookieyes banner -->
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/ac2cd11cbb9ec3ee85dbe20194a477f6/script.js"></script>
+  <!-- End cookieyes banner -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Old School - Szkoła DJ-ska</title>
@@ -11,10 +14,11 @@
   <meta property="og:url" content="https://www.oldschooldj.pl" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <!-- Meta Pixel -->
-  <!-- TODO CookieYes: dodaj type="text/plain" data-cookieyes="cookieyes-marketing" gdy wdrożysz CookieYes -->
-  <script src="js/tracking.js"></script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=733792335708657&ev=PageView&noscript=1"/></noscript>
+  <!-- Meta Pixel — zablokowany do zgody marketingowej przez CookieYes -->
+  <!-- UWAGA: "cookieyes-advertisement" to domyślny slug kategorii reklamowej w CookieYes. -->
+  <!-- Jeśli Twój dashboard używa innego slug (np. "marketing"), zmień poniżej i w js/form.js. -->
+  <script type="text/plain" data-cookieyes="cookieyes-advertisement" src="js/tracking.js"></script>
+  <!-- noscript fallback usunięty — nie można go kontrolować przez CookieYes -->
   <!-- End Meta Pixel -->
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <link rel="stylesheet" href="css/styles.css" />
@@ -139,7 +143,22 @@
         </div>
 
         <div class="opinie-video-wrap">
-          <iframe src="https://www.youtube.com/embed/5jS4ByO5feo?modestbranding=1&rel=0" allowfullscreen loading="lazy" title="Opinie kursantów Old School DJ"></iframe>
+          <div class="yt-placeholder" id="yt-placeholder">
+            <svg class="yt-placeholder-icon" viewBox="0 0 71 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M69.2 7.8C68.4 4.8 66 2.4 63 1.6 57.5 0 35.5 0 35.5 0S13.5 0 8 1.6C5 2.4 2.6 4.8 1.8 7.8 0 13.3 0 25 0 25s0 11.7 1.8 17.2c.8 3 3.2 5.4 6.2 6.2C13.5 50 35.5 50 35.5 50s22 0 27.5-1.6c3-.8 5.4-3.2 6.2-6.2C71 36.7 71 25 71 25s0-11.7-1.8-17.2z" fill="#E83030" opacity="0.7"/>
+              <path d="M28.5 35.6l18.3-10.6-18.3-10.6v21.2z" fill="#F2EDEC"/>
+            </svg>
+            <p class="yt-placeholder-text">To wideo wymaga zgody<br>na cookies marketingowych</p>
+            <button class="yt-placeholder-btn cky-btn-revisit" type="button">Zarządzaj zgodami</button>
+          </div>
+          <iframe
+            id="yt-iframe"
+            data-src="https://www.youtube.com/embed/5jS4ByO5feo?modestbranding=1&rel=0"
+            allowfullscreen
+            loading="lazy"
+            title="Opinie kursantów Old School DJ"
+            style="display:none"
+          ></iframe>
         </div>
 
       </div>
@@ -393,6 +412,7 @@
       <div class="footer-social">
         <a href="https://www.instagram.com/oldschool.dd?igsh=MXNoNjlxOWllc25jaA%3D%3D&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
         <a href="tel:+48512870822">+48 512 870 822</a>
+        <button class="footer-cookies-btn cky-btn-revisit" type="button">Ustawienia cookies</button>
       </div>
     </div>
   </footer>

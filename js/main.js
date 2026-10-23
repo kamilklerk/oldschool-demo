@@ -105,3 +105,39 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     window.scrollTo({ top, behavior: 'smooth' });
   });
 });
+
+// YouTube consent management
+// Slug kategorii musi być zgodny z dashboardem CookieYes (domyślnie: "advertisement").
+function getCkyAdvertisementConsent() {
+  const match = document.cookie.split('; ')
+    .find(c => c.startsWith('cookieyes-consent='));
+  if (!match) return false;
+  const val = decodeURIComponent(match.split('=').slice(1).join('='));
+  return val.split(',').includes('advertisement:yes');
+}
+
+function updateYouTubeEmbed(hasConsent) {
+  const placeholder = document.getElementById('yt-placeholder');
+  const iframe = document.getElementById('yt-iframe');
+  if (!placeholder || !iframe) return;
+  if (hasConsent) {
+    placeholder.style.display = 'none';
+    if (!iframe.getAttribute('src') && iframe.dataset.src) {
+      iframe.src = iframe.dataset.src;
+    }
+    iframe.style.display = '';
+  } else {
+    placeholder.style.display = '';
+    iframe.removeAttribute('src');
+    iframe.style.display = 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  updateYouTubeEmbed(getCkyAdvertisementConsent());
+});
+
+document.addEventListener('cookieyes', function(event) {
+  const accepted = event.detail && event.detail.accepted;
+  updateYouTubeEmbed(Array.isArray(accepted) && accepted.includes('advertisement'));
+});

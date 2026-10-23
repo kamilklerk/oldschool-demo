@@ -1422,6 +1422,60 @@
 
     .footer-social a:hover { color: var(--text); }
 
+    .footer-cookies-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color .2s;
+    }
+    .footer-cookies-btn:hover { color: var(--text); }
+
+    /* YouTube consent placeholder */
+    .yt-placeholder {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      background: var(--card);
+    }
+    .yt-placeholder-icon {
+      width: 52px;
+      height: 37px;
+      flex-shrink: 0;
+    }
+    .yt-placeholder-text {
+      font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+    .yt-placeholder-btn {
+      font-family: 'Neue Haas Grotesk Display Pro', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      background: transparent;
+      border: 1px solid var(--border-mid);
+      padding: 0.5rem 1.1rem;
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .yt-placeholder-btn:hover {
+      border-color: var(--red-bright);
+      color: var(--red-bright);
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       .form-inner {
