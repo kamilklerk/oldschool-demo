@@ -1,6 +1,11 @@
-// Sprawdza czy użytkownik wyraził zgodę na kategorię "advertisement" w CookieYes.
-// Slug kategorii musi być zgodny z dashboardem CookieYes (domyślnie: "advertisement").
+// Sprawdza zgodę na kategorię "advertisement" przez CookieYes API lub cookie.
+// CookieYes API: getCkyConsent() → { categories: { advertisement: true/false, ... } }
 function hasCkyMarketing() {
+  if (typeof window.getCkyConsent === 'function') {
+    const c = window.getCkyConsent();
+    return !!(c.categories && c.categories.advertisement === true);
+  }
+  // Fallback: parsowanie cookie (gdy getCkyConsent niedostępne, np. w testach)
   const match = document.cookie.split('; ')
     .find(c => c.startsWith('cookieyes-consent='));
   if (!match) return false;

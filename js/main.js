@@ -107,8 +107,14 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
 
 // YouTube consent management
-// Slug kategorii musi być zgodny z dashboardem CookieYes (domyślnie: "advertisement").
+// CookieYes API: getCkyConsent(), revisitCkyConsent(), event "cookieyes_consent_update"
+// Kategoria reklamowa w tym koncie CookieYes: slug "advertisement"
 function getCkyAdvertisementConsent() {
+  if (typeof window.getCkyConsent === 'function') {
+    const c = window.getCkyConsent();
+    return !!(c.categories && c.categories.advertisement === true);
+  }
+  // Fallback: parsowanie cookie (gdy getCkyConsent niedostępne, np. w testach)
   const match = document.cookie.split('; ')
     .find(c => c.startsWith('cookieyes-consent='));
   if (!match) return false;
@@ -137,7 +143,9 @@ document.addEventListener('DOMContentLoaded', function() {
   updateYouTubeEmbed(getCkyAdvertisementConsent());
 });
 
-document.addEventListener('cookieyes', function(event) {
+// Rzeczywista nazwa zdarzenia CookieYes: "cookieyes_consent_update"
+// Detail: { accepted: ['necessary','advertisement',...], rejected: [...] }
+document.addEventListener('cookieyes_consent_update', function(event) {
   const accepted = event.detail && event.detail.accepted;
   updateYouTubeEmbed(Array.isArray(accepted) && accepted.includes('advertisement'));
 });
