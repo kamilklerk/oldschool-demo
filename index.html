@@ -2138,33 +2138,158 @@
       content.classList.toggle('open');
     }
 
-    async function handleSubmit(e) {
+    // ═══════════════════════════════════════════════════════════════
+    // UTM TRACKING — first-touch (localStorage) + last-touch (sessionStorage)
+    // Bramka: tylko przy zgodzie CookieYes advertisement:yes
+    // ═══════════════════════════════════════════════════════════════
+    (function() {
+      var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign'];
+      var FT = 'utm_ft_';
+      var LT = 'utm_lt_';
+
+      function hasAdConsent() {
+        try {
+          var c = document.cookie.split(';')
+            .map(function(x) { return x.trim(); })
+            .find(function(x) { return x.startsWith('cookieyes-consent='); });
+          if (!c) return false;
+          return decodeURIComponent(c.split('=').slice(1).join('=')).includes('advertisement:yes');
+        } catch (_) { return false; }
+      }
+
+      function captureUtm() {
+        if (!hasAdConsent()) return;
+        try {
+          var params = new URLSearchParams(window.location.search);
+          UTM_KEYS.forEach(function(k) {
+            var val = params.get(k) !== null ? params.get(k) : (k === 'utm_source' ? 'unknown' : '');
+            sessionStorage.setItem(LT + k, val);
+            if (localStorage.getItem(FT + k) === null) {
+              localStorage.setItem(FT + k, val);
+            }
+          });
+        } catch (_) {}
+      }
+
+      function clearUtmStorage() {
+        try {
+          UTM_KEYS.forEach(function(k) {
+            localStorage.removeItem(FT + k);
+            sessionStorage.removeItem(LT + k);
+          });
+        } catch (_) {}
+      }
+
+      captureUtm();
+
+      document.addEventListener('cookieyes_consent_update', function(e) {
+        try {
+          var detail = (e && e.detail) ? e.detail : {};
+          var accepted = detail.accepted || [];
+          var rejected = detail.rejected || [];
+          if (accepted.indexOf('advertisement') !== -1) { captureUtm(); }
+          else if (rejected.indexOf('advertisement') !== -1) { clearUtmStorage(); }
+        } catch (_) {}
+      });
+
+      window._getUtmPayload = function() {
+        var out = {};
+        try {
+          UTM_KEYS.forEach(function(k) {
+            out[k + '_lt'] = sessionStorage.getItem(LT + k) || '';
+            out[k + '_ft'] = localStorage.getItem(FT + k) || '';
+          });
+        } catch (_) {}
+        return out;
+      };
+    })();
+    // ═══════════════════════════════════════════════════════════════
+
+        async function handleSubmit(e) {
       e.preventDefault();
       const form = e.target;
       const btn = form.querySelector('.form-submit');
+
+      // Blokuj podwójne kliknięcie
+      if (btn.disabled) return;
+
       btn.textContent = 'Wysyłam...';
       btn.disabled = true;
 
+      const utms = window._getUtmPayload ? window._getUtmPayload() : {};
       const data = {
-        imie: form.imie.value,
-        telefon: form.telefon.value,
-        email: form.email.value,
+        imie:            form.imie.value.trim(),
+        telefon:         form.telefon.value.trim(),
+        email:           form.email.value.trim(),
+        utm_source_lt:   utms.utm_source_lt   || '',
+        utm_medium_lt:   utms.utm_medium_lt   || '',
+        utm_campaign_lt: utms.utm_campaign_lt || '',
+        utm_source_ft:   utms.utm_source_ft   || '',
+        utm_medium_ft:   utms.utm_medium_ft   || '',
+        utm_campaign_ft: utms.utm_campaign_ft || '',
       };
 
+      const WEBHOOK_URL = 'https://hook.eu1.make.com/ex1r5vixe7k1ppln78pmypdqlmpv726q';
+
+      let success = false;
+
       try {
-        await fetch('https://hook.eu1.make.com/ex1r5vixe7k1ppln78pmypdqlmpv726q', {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+        const resp = await fetch(WEBHOOK_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
+          signal: controller.signal,
         });
-      } catch (_) {}
 
-      if (typeof fbq !== 'undefined') {
-        fbq('track', 'Lead', { content_name: 'Lista oczekujących DJ PRO' });
+        clearTimeout(timeoutId);
+
+        if (resp.ok) {
+          let json;
+          try { json = await resp.json(); } catch (_) {}
+          // Sukces TYLKO gdy Make potwierdzi success:true
+          if (json && json.success === true) {
+            success = true;
+          }
+        }
+      } catch (_) {
+        success = false;
       }
 
-      form.style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
+      if (success) {
+        // Sprawdź zgodę marketingową CookieYes przed odpaleniem Meta Lead
+        const hasMarketingConsent = (function() {
+          try {
+            const c = document.cookie.split(';').map(x => x.trim())
+              .find(x => x.startsWith('cookieyes-consent='));
+            if (!c) return false;
+            const val = decodeURIComponent(c.split('=').slice(1).join('='));
+            return val.includes('advertisement:yes');
+          } catch (_) { return false; }
+        })();
+
+        if (hasMarketingConsent && typeof fbq !== 'undefined') {
+          fbq('track', 'Lead', { content_name: 'Lista oczekujących DJ PRO' });
+        }
+
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        // Przywróć formularz z danymi, pokaż błąd
+        btn.textContent = 'CHCĘ DOŁĄCZYĆ DO LISTY';
+        btn.disabled = false;
+
+        let errEl = form.querySelector('.form-error-msg');
+        if (!errEl) {
+          errEl = document.createElement('p');
+          errEl.className = 'form-error-msg';
+          errEl.style.cssText = 'color:#E83030;font-size:0.85rem;margin-top:0.75rem;text-align:center;';
+          btn.insertAdjacentElement('afterend', errEl);
+        }
+        errEl.textContent = 'Coś poszło nie tak. Sprawdź połączenie i spróbuj ponownie.';
+      }
     }
 
     // Hide sticky CTA near contact section
