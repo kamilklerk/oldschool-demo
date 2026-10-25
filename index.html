@@ -2138,7 +2138,74 @@
       content.classList.toggle('open');
     }
 
-    async function handleSubmit(e) {
+    // ═══════════════════════════════════════════════════════════════
+    // UTM TRACKING — first-touch (localStorage) + last-touch (sessionStorage)
+    // Bramka: tylko przy zgodzie CookieYes advertisement:yes
+    // ═══════════════════════════════════════════════════════════════
+    (function() {
+      var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign'];
+      var FT = 'utm_ft_';
+      var LT = 'utm_lt_';
+
+      function hasAdConsent() {
+        try {
+          var c = document.cookie.split(';')
+            .map(function(x) { return x.trim(); })
+            .find(function(x) { return x.startsWith('cookieyes-consent='); });
+          if (!c) return false;
+          return decodeURIComponent(c.split('=').slice(1).join('=')).includes('advertisement:yes');
+        } catch (_) { return false; }
+      }
+
+      function captureUtm() {
+        if (!hasAdConsent()) return;
+        try {
+          var params = new URLSearchParams(window.location.search);
+          UTM_KEYS.forEach(function(k) {
+            var val = params.get(k) !== null ? params.get(k) : (k === 'utm_source' ? 'unknown' : '');
+            sessionStorage.setItem(LT + k, val);
+            if (localStorage.getItem(FT + k) === null) {
+              localStorage.setItem(FT + k, val);
+            }
+          });
+        } catch (_) {}
+      }
+
+      function clearUtmStorage() {
+        try {
+          UTM_KEYS.forEach(function(k) {
+            localStorage.removeItem(FT + k);
+            sessionStorage.removeItem(LT + k);
+          });
+        } catch (_) {}
+      }
+
+      captureUtm();
+
+      document.addEventListener('cookieyes_consent_update', function(e) {
+        try {
+          var detail = (e && e.detail) ? e.detail : {};
+          var accepted = detail.accepted || [];
+          var rejected = detail.rejected || [];
+          if (accepted.indexOf('advertisement') !== -1) { captureUtm(); }
+          else if (rejected.indexOf('advertisement') !== -1) { clearUtmStorage(); }
+        } catch (_) {}
+      });
+
+      window._getUtmPayload = function() {
+        var out = {};
+        try {
+          UTM_KEYS.forEach(function(k) {
+            out[k + '_lt'] = sessionStorage.getItem(LT + k) || '';
+            out[k + '_ft'] = localStorage.getItem(FT + k) || '';
+          });
+        } catch (_) {}
+        return out;
+      };
+    })();
+    // ═══════════════════════════════════════════════════════════════
+
+        async function handleSubmit(e) {
       e.preventDefault();
       const form = e.target;
       const btn = form.querySelector('.form-submit');
@@ -2149,10 +2216,17 @@
       btn.textContent = 'Wysyłam...';
       btn.disabled = true;
 
+      const utms = window._getUtmPayload ? window._getUtmPayload() : {};
       const data = {
-        imie: form.imie.value.trim(),
-        telefon: form.telefon.value.trim(),
-        email: form.email.value.trim(),
+        imie:            form.imie.value.trim(),
+        telefon:         form.telefon.value.trim(),
+        email:           form.email.value.trim(),
+        utm_source_lt:   utms.utm_source_lt   || '',
+        utm_medium_lt:   utms.utm_medium_lt   || '',
+        utm_campaign_lt: utms.utm_campaign_lt || '',
+        utm_source_ft:   utms.utm_source_ft   || '',
+        utm_medium_ft:   utms.utm_medium_ft   || '',
+        utm_campaign_ft: utms.utm_campaign_ft || '',
       };
 
       const WEBHOOK_URL = 'https://hook.eu1.make.com/ex1r5vixe7k1ppln78pmypdqlmpv726q';
