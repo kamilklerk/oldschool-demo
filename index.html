@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+  <!-- CookieYes Consent Management — musi być jako pierwszy element <head> -->
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/ac2cd11cbb9ec3ee85dbe20194a477f6/script.js"></script>
+  <!-- End CookieYes -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Old School - Szkoła DJ-ska</title>
@@ -11,14 +14,14 @@
   <meta property="og:url" content="https://www.oldschooldj.pl" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <!-- Meta Pixel -->
+  <!-- Meta Pixel SDK — ładowany teraz, ale fbq('init') i fbq('track','PageView')
+       wywoływane tylko po zgodzie advertisement:yes (handler poniżej w JS).
+       noscript usunięty — nie można go kontrolować przez CookieYes. -->
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '733792335708657');
-    fbq('track', 'PageView');
+    // fbq('init') i fbq('track','PageView') — patrz handler zgody CookieYes w <script> na dole
   </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=733792335708657&ev=PageView&noscript=1"/></noscript>
-  <!-- End Meta Pixel -->
+  <!-- End Meta Pixel SDK -->
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <style>
     @font-face { font-family: 'Neue Haas Grotesk Display Pro'; src: url('fonts/NeueHaasDisplayXXThin.ttf') format('truetype'); font-weight: 100; font-style: normal; font-display: swap; }
@@ -2139,14 +2142,17 @@
     }
 
     // ═══════════════════════════════════════════════════════════════
-    // UTM TRACKING — first-touch (localStorage) + last-touch (sessionStorage)
-    // Bramka: tylko przy zgodzie CookieYes advertisement:yes
+    // CONSENT HANDLER — CookieYes advertisement:yes
+    // Obsługuje: Meta Pixel init + PageView ORAZ UTM first-touch / last-touch
     // ═══════════════════════════════════════════════════════════════
     (function() {
       var UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign'];
       var FT = 'utm_ft_';
       var LT = 'utm_lt_';
+      var PIXEL_ID = '733792335708657';
+      var pixelInitialized = false;
 
+      // ── Sprawdź cookie CookieYes ────────────────────────────────
       function hasAdConsent() {
         try {
           var c = document.cookie.split(';')
@@ -2157,8 +2163,19 @@
         } catch (_) { return false; }
       }
 
+      // ── Meta Pixel: init + PageView (idempotentne) ──────────────
+      function initPixel() {
+        if (pixelInitialized) return;
+        try {
+          if (typeof fbq === 'undefined') return;
+          fbq('init', PIXEL_ID);
+          fbq('track', 'PageView');
+          pixelInitialized = true;
+        } catch (_) {}
+      }
+
+      // ── UTM capture ─────────────────────────────────────────────
       function captureUtm() {
-        if (!hasAdConsent()) return;
         try {
           var params = new URLSearchParams(window.location.search);
           UTM_KEYS.forEach(function(k) {
@@ -2180,17 +2197,34 @@
         } catch (_) {}
       }
 
-      captureUtm();
+      // ── Gdy zgoda udzielona: pixel + UTM ────────────────────────
+      function onAdConsentGranted() {
+        initPixel();
+        captureUtm();
+      }
 
+      // ── Sprawdź zgodę przy ładowaniu strony ─────────────────────
+      if (hasAdConsent()) {
+        onAdConsentGranted();
+      }
+
+      // ── Nasłuchuj zmian zgody (user kliknął baner) ───────────────
       document.addEventListener('cookieyes_consent_update', function(e) {
         try {
           var detail = (e && e.detail) ? e.detail : {};
           var accepted = detail.accepted || [];
           var rejected = detail.rejected || [];
-          if (accepted.indexOf('advertisement') !== -1) { captureUtm(); }
-          else if (rejected.indexOf('advertisement') !== -1) { clearUtmStorage(); }
+          if (accepted.indexOf('advertisement') !== -1) {
+            onAdConsentGranted();
+          } else if (rejected.indexOf('advertisement') !== -1) {
+            clearUtmStorage();
+            // Pixel już nie można cofnąć jeśli był init — ale nie był, więc nic nie rób
+          }
         } catch (_) {}
       });
+
+      // ── Public API dla formularza ────────────────────────────────
+      window._pixelReady = function() { return pixelInitialized; };
 
       window._getUtmPayload = function() {
         var out = {};
@@ -2270,7 +2304,7 @@
           } catch (_) { return false; }
         })();
 
-        if (hasMarketingConsent && typeof fbq !== 'undefined') {
+        if (hasMarketingConsent && window._pixelReady && window._pixelReady()) {
           fbq('track', 'Lead', { content_name: 'Lista oczekujących DJ PRO' });
         }
 
