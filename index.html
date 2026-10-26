@@ -692,6 +692,43 @@
       width: 100%; height: 100%; border: none;
     }
 
+    .yt-consent-overlay {
+      position: absolute; inset: 0;
+      background: #111;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 1.5rem; gap: 1rem;
+    }
+    .yt-consent-overlay img {
+      width: 100%; height: 100%;
+      object-fit: cover; opacity: .35;
+      position: absolute; inset: 0;
+    }
+    .yt-consent-text {
+      position: relative; z-index: 1;
+      color: #fff; font-size: .85rem; line-height: 1.4;
+    }
+    .yt-consent-btn {
+      position: relative; z-index: 1;
+      background: var(--red-bright); color: #fff;
+      border: none; border-radius: 4px;
+      padding: .55rem 1.2rem; font-size: .82rem;
+      cursor: pointer; font-family: inherit;
+    }
+    .yt-consent-btn:hover { opacity: .85; }
+
+    .form-consent-group { margin: .75rem 0 0; }
+    .consent-label {
+      display: flex; gap: .6rem; align-items: flex-start;
+      cursor: pointer; font-size: .78rem;
+      color: var(--muted); line-height: 1.4;
+    }
+    .consent-label input[type=checkbox] {
+      margin-top: .15rem; flex-shrink: 0;
+      accent-color: var(--red-bright); width: 14px; height: 14px;
+      cursor: pointer;
+    }
+
     .opinie-cards {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1856,8 +1893,13 @@
           <h2 class="section-title" style="color:var(--red-bright);">CO MÓWIĄ KURSANCI?</h2>
         </div>
 
-        <div class="opinie-video-wrap">
-          <iframe src="https://www.youtube.com/embed/5jS4ByO5feo?modestbranding=1&rel=0" allowfullscreen loading="lazy" title="Opinie kursantów Old School DJ"></iframe>
+        <div class="opinie-video-wrap" id="yt-consent-wrapper">
+          <!-- YouTube zaladuje sie po udzieleniu zgody na cookies funkcjonalne -->
+          <div class="yt-consent-overlay" id="yt-overlay">
+            <img src="https://img.youtube.com/vi/5jS4ByO5feo/hqdefault.jpg" alt="Film z opiniami kursantów" loading="lazy" />
+            <p class="yt-consent-text">Film zostanie załadowany po zaakceptowaniu cookies funkcjonalnych.</p>
+            <button class="yt-consent-btn" onclick="openCookieSettings()">Zarządzaj zgodami</button>
+          </div>
         </div>
 
       </div>
@@ -1982,8 +2024,20 @@
                   <input type="email" id="email" name="email" placeholder="twoj@email.pl" />
                 </div>
 
+                <div class="form-consent-group">
+                  <label class="consent-label">
+                    <input type="checkbox" name="zgoda_email" id="zgoda_email" />
+                    <span id="zgoda_email_tresc">Wyrażam zgodę na przesyłanie informacji marketingowych dotyczących oferty Old School DJ drogą elektroniczną na podany adres e-mail (zgoda dobrowolna, możliwa do odwołania).</span>
+                  </label>
+                </div>
+                <div class="form-consent-group">
+                  <label class="consent-label">
+                    <input type="checkbox" name="zgoda_sms" id="zgoda_sms" />
+                    <span id="zgoda_sms_tresc">Wyrażam zgodę na kontakt marketingowy telefoniczny oraz SMS dotyczący oferty Old School DJ (zgoda dobrowolna, możliwa do odwołania).</span>
+                  </label>
+                </div>
                 <button type="submit" class="form-submit">CHCĘ DOŁĄCZYĆ DO LISTY</button>
-                <p class="form-disclaimer">Wysyłając formularz zgadzasz się na kontakt w sprawie nowego naboru. Dane nie są przekazywane osobom trzecim.</p>
+                <p class="form-disclaimer">Wysyłając formularz wyrażasz zgodę na kontakt w sprawie nowego naboru. Administratorem danych jest Kamil Klerk. <a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:underline;">Polityka prywatności</a>.</p>
                 <p class="form-disclaimer" style="margin-top:0.5rem;">Zapis na listę jest bezpłatny i do niczego Cię nie zobowiązuje.</p>
               </form>
 
@@ -2107,7 +2161,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2026 Oldschool Szkoła DJ-ska</p>
+      <p class="footer-copy">© 2026 Oldschool Szkoła DJ-ska &nbsp;·&nbsp; <a href="privacy.html" style="color:var(--muted);text-decoration:none;" target="_blank">Polityka prywatności</a> &nbsp;·&nbsp; <button class="cky-btn-revisit" style="background:none;border:none;color:var(--muted);font-size:inherit;cursor:pointer;padding:0;font-family:inherit;">Ustawienia cookies</button></p>
       <div class="footer-social">
         <a href="https://www.instagram.com/oldschool.dd?igsh=MXNoNjlxOWllc25jaA%3D%3D&utm_source=qr" target="_blank" rel="noopener">Instagram</a>
         <a href="tel:+48512870822">+48 512 870 822</a>
@@ -2251,6 +2305,12 @@
       btn.disabled = true;
 
       const utms = window._getUtmPayload ? window._getUtmPayload() : {};
+      const zgodaEmailEl  = form.querySelector('#zgoda_email');
+      const zgodaSmsEl    = form.querySelector('#zgoda_sms');
+      const zgodaEmailTxt = document.getElementById('zgoda_email_tresc')?.textContent || '';
+      const zgodaSmsTxt   = document.getElementById('zgoda_sms_tresc')?.textContent   || '';
+      const consentTs     = new Date().toISOString();
+
       const data = {
         imie:            form.imie.value.trim(),
         telefon:         form.telefon.value.trim(),
@@ -2261,6 +2321,11 @@
         utm_source_ft:   utms.utm_source_ft   || '',
         utm_medium_ft:   utms.utm_medium_ft   || '',
         utm_campaign_ft: utms.utm_campaign_ft || '',
+        zgoda_email:         zgodaEmailEl?.checked ? 'tak' : 'nie',
+        zgoda_email_tresc:   zgodaEmailEl?.checked ? zgodaEmailTxt : '',
+        zgoda_sms:           zgodaSmsEl?.checked ? 'tak' : 'nie',
+        zgoda_sms_tresc:     zgodaSmsEl?.checked ? zgodaSmsTxt : '',
+        zgoda_timestamp:     consentTs,
       };
 
       const WEBHOOK_URL = 'https://hook.eu1.make.com/ex1r5vixe7k1ppln78pmypdqlmpv726q';
@@ -2324,6 +2389,50 @@
         }
         errEl.textContent = 'Coś poszło nie tak. Sprawdź połączenie i spróbuj ponownie.';
       }
+    }
+
+
+    // ═══════════════════════════════════════════════════════════════
+    // YOUTUBE CONSENT GATE
+    // ═══════════════════════════════════════════════════════════════
+    (function() {
+      function hasFunctionalConsent() {
+        try {
+          var c = document.cookie.split(';').map(function(x){return x.trim();})
+            .find(function(x){return x.startsWith('cookieyes-consent=');});
+          if (!c) return false;
+          return decodeURIComponent(c.split('=').slice(1).join('=')).includes('functional:yes');
+        } catch(_) { return false; }
+      }
+      function loadYoutube() {
+        var w = document.getElementById('yt-consent-wrapper');
+        if (!w || w.dataset.ytLoaded) return;
+        w.dataset.ytLoaded = '1';
+        var overlay = document.getElementById('yt-overlay');
+        if (overlay) overlay.remove();
+        var iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/5jS4ByO5feo?modestbranding=1&rel=0';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('loading', 'lazy');
+        iframe.setAttribute('title', 'Opinie kursant\u00f3w Old School DJ');
+        iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+        w.appendChild(iframe);
+      }
+      if (hasFunctionalConsent()) { loadYoutube(); }
+      document.addEventListener('cookieyes_consent_update', function(e) {
+        try {
+          var detail = (e && e.detail) ? e.detail : {};
+          var accepted = detail.accepted || [];
+          if (accepted.indexOf('functional') !== -1) { loadYoutube(); }
+        } catch(_) {}
+      });
+    })();
+
+    // ── CookieYes re-open helper ─────────────────────────────────
+    function openCookieSettings() {
+      var revisit = document.querySelector('.cky-btn-revisit');
+      if (revisit) { revisit.click(); return; }
+      document.dispatchEvent(new CustomEvent('cky-revoke-consent'));
     }
 
     // Hide sticky CTA near contact section
