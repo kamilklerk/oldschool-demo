@@ -788,19 +788,22 @@
       position: relative;
       overflow: hidden;
       border-top: 1px solid var(--border);
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
     }
 
     .why-bg-photo {
       position: absolute;
-      top: 0; bottom: 0; left: 0; right: 50%;
+      top: 0; bottom: 0; left: 0; right: 0;
       background-image: url('assets/inmerse.png');
       background-size: cover;
       background-position: center center;
-      opacity: 0.18;
+      opacity: 0.22;
       pointer-events: none;
       z-index: 0;
-      mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 75%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 75%, transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
     }
 
     .why-inner {
