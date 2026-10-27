@@ -1652,46 +1652,6 @@
     .indyw-content p:last-child { margin-bottom: 0; }
   
     /* VISION SECTION */
-    .vision-section {
-      position: relative;
-      width: 100%;
-      height: 100svh;
-      overflow: hidden;
-      background: var(--bg);
-    }
-    .vision-img-rotated {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .vision-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(7,4,4,0.45);
-      z-index: 1;
-    }
-    .vision-headline {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      font-size: clamp(2.5rem, 7vw, 6rem);
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      line-height: 1.15;
-      color: var(--text);
-      width: 90%;
-      max-width: 900px;
-      text-align: center;
-    }
-    @media (max-width: 900px) {
-      .vision-section { height: 100svh; }
-    }
-
     /* PHOTO CAPTION SECTION */
     .photo-caption-section {
       position: relative;
@@ -1813,12 +1773,6 @@
   </section>
 
   <!-- VISION -->
-  <section class="vision-section">
-    <img src="zdjecia do index-new/9.png" alt="" class="vision-img-rotated" />
-    <div class="vision-overlay"></div>
-    <h2 class="vision-headline">ZOSTAŃ DJ-EM<br>W 3 MIESIĄCE</h2>
-  </section>
-
   <!-- PHOTO CAPTION -->
   <section class="photo-caption-section">
     <img src="zdjecia do index-new/10.jpg" alt="" class="photo-caption-img" />
@@ -2447,7 +2401,7 @@
 
     // Snap scroll dla pierwszych 3 sekcji
     (function() {
-      const snapSecs = ['#hero', '.vision-section', '.photo-caption-section']
+      const snapSecs = ['#hero', '.photo-caption-section']
         .map(s => document.querySelector(s)).filter(Boolean);
       if (!snapSecs.length) return;
 
