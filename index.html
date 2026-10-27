@@ -2393,7 +2393,15 @@
 
     // ── CookieYes re-open helper ─────────────────────────────────
     function openCookieSettings() {
-      document.dispatchEvent(new CustomEvent('cky-revoke-consent'));
+      // CookieYes injects a .cky-btn-revisit button into the DOM — click it
+      var btn = document.querySelector('.cky-btn-revisit');
+      if (btn) { btn.click(); return; }
+      // Fallback: try their banner show API
+      if (window.CookieYes && typeof window.CookieYes.run === 'function') {
+        window.CookieYes.run('show'); return;
+      }
+      // Last resort: reload with param that forces banner
+      window.location.href = window.location.pathname + '?cky-show=1';
     }
 
     // Hide sticky CTA near contact section
