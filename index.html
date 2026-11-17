@@ -45,20 +45,20 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --bg:         #070404;
-      --dark:       #0F0808;
-      --card:       #130B0B;
-      --card-hover: #1A1010;
-      --border:     #201212;
-      --border-mid: #2E1818;
-      --red:        #C41E1E;
-      --red-bright: #E83030;
-      --red-dim:    rgba(196,30,30,0.15);
-      --red-glow:   rgba(196,30,30,0.08);
-      --text:       #F2EDEC;
-      --text-mid:   #C4B8B8;
-      --muted:      #7A6060;
-      --dim:        #3A2828;
+      --bg:         #0A0705;
+      --dark:       #110B07;
+      --card:       #160F0A;
+      --card-hover: #1D140D;
+      --border:     #261A11;
+      --border-mid: #352416;
+      --red:        #D6582A;
+      --red-bright: #EC9234;
+      --red-dim:    rgba(214,88,42,0.15);
+      --red-glow:   rgba(214,88,42,0.08);
+      --text:       #ECE5D6;
+      --text-mid:   #C8BCA6;
+      --muted:      #8A7660;
+      --dim:        #4A3A2A;
     }
 
     html { scroll-behavior: smooth; }
@@ -84,7 +84,7 @@
       justify-content: space-between;
       padding: 0 2.5rem;
       height: 72px;
-      background: rgba(7,4,4,0.88);
+      background: rgba(10,7,5,0.88);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
     }
@@ -137,8 +137,8 @@
       position: absolute; inset: 0;
       z-index: 1;
       background:
-        linear-gradient(to bottom, rgba(7,4,4,0.15) 0%, rgba(7,4,4,0.35) 55%, rgba(7,4,4,0.92) 100%),
-        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(196,30,30,0.18) 0%, transparent 70%);
+        linear-gradient(to bottom, rgba(10,7,5,0.15) 0%, rgba(10,7,5,0.35) 55%, rgba(10,7,5,0.92) 100%),
+        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(214,88,42,0.18) 0%, transparent 70%);
     }
 
     .hero-content {
@@ -156,7 +156,7 @@
 
     .hero-logo {
       display: block; width: 100%; height: auto;
-      filter: drop-shadow(0 0 40px rgba(196,30,30,0.25));
+      filter: drop-shadow(0 0 40px rgba(214,88,42,0.25));
     }
 
     .hero-headline {
@@ -226,8 +226,8 @@
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: rgba(196,30,30,0.12);
-      border: 1px solid rgba(196,30,30,0.35);
+      background: rgba(214,88,42,0.12);
+      border: 1px solid rgba(214,88,42,0.35);
       padding: 10px 22px;
       margin-bottom: 2.5rem;
     }
@@ -453,8 +453,8 @@
 
     .journey-path-step.active {
       color: var(--red-bright);
-      border-color: rgba(196,30,30,0.4);
-      background: rgba(196,30,30,0.1);
+      border-color: rgba(214,88,42,0.4);
+      background: rgba(214,88,42,0.1);
     }
 
     .journey-path-arrow {
@@ -659,7 +659,7 @@
       max-width: 580px;
     }
 
-    .step-item.highlight .step-num { color: rgba(196,30,30,0.3); }
+    .step-item.highlight .step-num { color: rgba(214,88,42,0.3); }
     .step-item.highlight .step-title { color: var(--red-bright); }
 
     /* ─── OPINIE ─── */
@@ -832,7 +832,7 @@
 
     .why-card:hover { background: var(--card-hover); }
     .why-card.highlight { background: var(--red-glow); }
-    .why-card.highlight:hover { background: rgba(196,30,30,0.12); }
+    .why-card.highlight:hover { background: rgba(214,88,42,0.12); }
 
     .why-card-bg {
       position: absolute; inset: 0;
@@ -902,7 +902,7 @@
     .location-feature-icon {
       width: 40px; height: 40px;
       background: var(--red-glow);
-      border: 1px solid rgba(196,30,30,0.2);
+      border: 1px solid rgba(214,88,42,0.2);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       color: var(--red-bright);
@@ -1036,8 +1036,8 @@
 
     .course-guarantee {
       display: block;
-      background: rgba(196,30,30,0.12);
-      border: 1px solid rgba(196,30,30,0.35);
+      background: rgba(214,88,42,0.12);
+      border: 1px solid rgba(214,88,42,0.35);
       padding: 14px 20px;
       font-size: 0.85rem;
       font-weight: 900;
@@ -1104,7 +1104,7 @@
     .risk-check {
       width: 36px; height: 36px;
       background: var(--red-glow);
-      border: 1px solid rgba(196,30,30,0.25);
+      border: 1px solid rgba(214,88,42,0.25);
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       color: var(--red-bright);
@@ -1630,7 +1630,7 @@
 
     .indyw-toggle.open .indyw-toggle-icon {
       background: var(--red-glow);
-      border-color: rgba(196,30,30,0.3);
+      border-color: rgba(214,88,42,0.3);
       color: var(--red-bright);
       transform: rotate(45deg);
     }
@@ -1676,9 +1676,9 @@
       inset: 0;
       background: linear-gradient(
         to top,
-        rgba(7,4,4,0.75) 0%,
-        rgba(7,4,4,0.1) 50%,
-        rgba(7,4,4,0) 100%
+        rgba(10,7,5,0.75) 0%,
+        rgba(10,7,5,0.1) 50%,
+        rgba(10,7,5,0) 100%
       );
       z-index: 1;
     }
@@ -1728,7 +1728,7 @@
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
-      background: linear-gradient(to bottom, rgba(7,4,4,0.3) 0%, rgba(7,4,4,0.7) 100%);
+      background: linear-gradient(to bottom, rgba(10,7,5,0.3) 0%, rgba(10,7,5,0.7) 100%);
       z-index: 1;
     }
     #hero .hero-content {
@@ -2362,7 +2362,7 @@
         if (!errEl) {
           errEl = document.createElement('p');
           errEl.className = 'form-error-msg';
-          errEl.style.cssText = 'color:#E83030;font-size:0.85rem;margin-top:0.75rem;text-align:center;';
+          errEl.style.cssText = 'color:#EC9234;font-size:0.85rem;margin-top:0.75rem;text-align:center;';
           btn.insertAdjacentElement('afterend', errEl);
         }
         errEl.textContent = 'Coś poszło nie tak. Sprawdź połączenie i spróbuj ponownie.';
