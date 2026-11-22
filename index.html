@@ -1968,15 +1968,6 @@
 
             <div class="indyw-toggle" onclick="toggleIndywidualny(this)">
               <div class="indyw-toggle-icon">+</div>
-              <span class="indyw-toggle-text">Wolisz indywidualnie? Dostępne też lekcje 1 na 1.</span>
-            </div>
-            <div class="indyw-content">
-              <p>Lekcje indywidualne to opcja dla osób, które chcą szybszych postępów, mają specyficzne cele muzyczne lub po prostu preferują pracę sam na sam z instruktorem.</p>
-              <p>Cena i harmonogram ustalane indywidualnie. <a href="#kontakt" style="color:var(--red-bright);text-decoration:none;">Napisz do nas</a> i dopasujemy format do Ciebie.</p>
-            </div>
-
-            <div class="indyw-toggle" onclick="toggleIndywidualny(this)">
-              <div class="indyw-toggle-icon">+</div>
               <span class="indyw-toggle-text">Kim są instruktorzy?</span>
             </div>
             <div class="indyw-content">
@@ -2023,8 +2014,8 @@
 
           <div>
             <div class="form-card">
-              <div class="form-card-title">CHCĘ DOŁĄCZYĆ</div>
-              <div class="form-card-sub">Zostaw kontakt - odezwiemy się w sprawie kursu. Po wysłaniu formularza możesz od razu wybrać grupę i przejść do zapisów.</div>
+              <div class="form-card-title">MASZ PYTANIA?</div>
+              <div class="form-card-sub">Zostaw numer — oddzwonimy i odpowiemy na wszystko.</div>
 
               <form id="lead-form" onsubmit="handleSubmit(event)">
                 <div class="form-group">
@@ -2052,7 +2043,7 @@
                     <span id="zgoda_sms_tresc">Wyrażam zgodę na kontakt marketingowy telefoniczny oraz SMS dotyczący oferty Old School DJ (zgoda dobrowolna, możliwa do odwołania).</span>
                   </label>
                 </div>
-                <button type="submit" class="form-submit">CHCĘ DOŁĄCZYĆ</button>
+                <button type="submit" class="form-submit">WYŚLIJ</button>
                 <p class="form-disclaimer">Szczegółowe informacje o przetwarzaniu danych znajdziesz w <a href="privacy.html" target="_blank" style="color:var(--muted);text-decoration:underline;">Polityce prywatności</a>.<br>Wysłanie formularza jest bezpłatne i nie zobowiązuje do zakupu kursu.</p>
               </form>
 
@@ -2454,7 +2445,7 @@
         document.getElementById('form-success').style.display = 'block';
       } else {
         // Przywróć formularz z danymi, pokaż błąd
-        btn.textContent = 'CHCĘ DOŁĄCZYĆ';
+        btn.textContent = 'WYŚLIJ';
         btn.disabled = false;
 
         let errEl = form.querySelector('.form-error-msg');
