@@ -275,6 +275,10 @@
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.4; transform: scale(1.5); }
     }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.3; transform: scale(0.65); }
+    }
 
     .hero-buttons {
       display: flex;
@@ -1891,31 +1895,35 @@
 
   <!-- NABOR COUNTDOWN -->
   <section id="nabor-countdown">
-    <div class="section-full" style="padding:2.5rem 0 1rem;">
+    <div class="section-full" style="padding:3.5rem 0 3rem;border-bottom:1px solid rgba(196,30,30,0.25);">
       <div class="section-inner" style="text-align:center;">
-        <div style="font-size:0.62rem;letter-spacing:0.22em;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;">Do startu naboru</div>
-        <div style="display:flex;justify-content:center;align-items:flex-start;gap:1.25rem;">
-          <div style="text-align:center;min-width:3rem;">
-            <span id="cnt-days" style="font-size:2.8rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
-            <div style="font-size:0.58rem;letter-spacing:0.18em;color:var(--muted);margin-top:0.35rem;">DNI</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:0.75rem;margin-bottom:2rem;">
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 8px var(--red-bright);animation:pulse-dot 1.4s ease-in-out infinite;"></span>
+          <span style="font-size:clamp(1.6rem,5vw,2.8rem);font-weight:900;letter-spacing:0.12em;color:var(--text);text-transform:uppercase;">NABÓR TRWA</span>
+          <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 8px var(--red-bright);animation:pulse-dot 1.4s ease-in-out infinite;"></span>
+        </div>
+        <div style="display:flex;justify-content:center;align-items:flex-start;gap:clamp(0.75rem,3vw,2rem);">
+          <div style="text-align:center;min-width:3.5rem;">
+            <span id="cnt-days" style="font-size:clamp(2.8rem,8vw,5rem);font-weight:900;color:var(--red-bright);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
+            <div style="font-size:0.6rem;letter-spacing:0.2em;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;">dni</div>
           </div>
-          <span style="font-size:2.2rem;color:var(--muted);padding-top:0.25rem;line-height:1;">:</span>
-          <div style="text-align:center;min-width:3rem;">
-            <span id="cnt-hours" style="font-size:2.8rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
-            <div style="font-size:0.58rem;letter-spacing:0.18em;color:var(--muted);margin-top:0.35rem;">GODZ</div>
+          <span style="font-size:clamp(2rem,6vw,4rem);font-weight:300;color:var(--muted);padding-top:0.15rem;line-height:1;">:</span>
+          <div style="text-align:center;min-width:3.5rem;">
+            <span id="cnt-hours" style="font-size:clamp(2.8rem,8vw,5rem);font-weight:900;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
+            <div style="font-size:0.6rem;letter-spacing:0.2em;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;">godz</div>
           </div>
-          <span style="font-size:2.2rem;color:var(--muted);padding-top:0.25rem;line-height:1;">:</span>
-          <div style="text-align:center;min-width:3rem;">
-            <span id="cnt-mins" style="font-size:2.8rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
-            <div style="font-size:0.58rem;letter-spacing:0.18em;color:var(--muted);margin-top:0.35rem;">MIN</div>
+          <span style="font-size:clamp(2rem,6vw,4rem);font-weight:300;color:var(--muted);padding-top:0.15rem;line-height:1;">:</span>
+          <div style="text-align:center;min-width:3.5rem;">
+            <span id="cnt-mins" style="font-size:clamp(2.8rem,8vw,5rem);font-weight:900;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
+            <div style="font-size:0.6rem;letter-spacing:0.2em;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;">min</div>
           </div>
-          <span style="font-size:2.2rem;color:var(--muted);padding-top:0.25rem;line-height:1;">:</span>
-          <div style="text-align:center;min-width:3rem;">
-            <span id="cnt-secs" style="font-size:2.8rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
-            <div style="font-size:0.58rem;letter-spacing:0.18em;color:var(--muted);margin-top:0.35rem;">SEK</div>
+          <span style="font-size:clamp(2rem,6vw,4rem);font-weight:300;color:var(--muted);padding-top:0.15rem;line-height:1;">:</span>
+          <div style="text-align:center;min-width:3.5rem;">
+            <span id="cnt-secs" style="font-size:clamp(2.8rem,8vw,5rem);font-weight:900;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
+            <div style="font-size:0.6rem;letter-spacing:0.2em;color:var(--muted);margin-top:0.5rem;text-transform:uppercase;">sek</div>
           </div>
         </div>
-        <div style="font-size:0.68rem;color:var(--muted);margin-top:1rem;letter-spacing:0.1em;">18 STYCZNIA 2027 &middot; GODZ. 18:00</div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:1.5rem;letter-spacing:0.12em;">DO STARTU NABORU &mdash; 18 STYCZNIA 2027, GODZ. 18:00</div>
       </div>
     </div>
   </section>
