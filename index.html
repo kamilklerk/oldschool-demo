@@ -2362,6 +2362,14 @@
         return;
       }
 
+      // Walidacja — wymagana co najmniej jedna zgoda marketingowa
+      const emailChecked = form.querySelector('#zgoda_email').checked;
+      const smsChecked   = form.querySelector('#zgoda_sms').checked;
+      if (!emailChecked && !smsChecked) {
+        alert('Zaznacz zgodę na kontakt — bez niej nie możemy się z Tobą odezwać.');
+        return;
+      }
+
       btn.textContent = 'Wysyłam...';
       btn.disabled = true;
 
