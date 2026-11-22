@@ -1950,6 +1950,9 @@
               <button class="btn-primary" id="proJoinBtn" style="width:100%;text-align:center;" onclick="toggleProJoin()">CHCĘ DOŁĄCZYĆ</button>
               <div id="proJoinOptions" style="display:none;margin-top:1rem;border:1px solid rgba(242,237,236,0.12);border-radius:6px;overflow:hidden;">
                 <a onclick="goToActivenow(event)" href="#" style="display:block;padding:1rem 1.25rem;background:var(--red);color:#fff;text-align:center;font-weight:700;letter-spacing:0.08em;font-size:0.85rem;text-decoration:none;">WYBIERAM GRUPĘ I ZAPISUJĘ SIĘ</a>
+                <div id="activenow-section" style="display:none;padding:1.5rem 1rem;background:rgba(255,255,255,0.03);">
+                  <div class="activenow-form-container activenow-form-147857-container"><center><img src="https://www.activenow.io/assets/ripple.gif" width="100px"/></center><script async src="https://app.activenow.io/external/signup_form/load_by_js?age_group=&city_name=&code=zcDr3k2AqXxRqUBR&discipline_id=&proficiency_id=&school_id=15449&signup_form_id=147857&venue_id=&zz="></script></div>
+                </div>
                 <div style="padding:0.5rem;text-align:center;font-size:0.7rem;color:var(--muted);">lub</div>
                 <a href="#kontakt" style="display:block;padding:1rem 1.25rem;text-align:center;font-weight:600;color:var(--text);font-size:0.85rem;text-decoration:none;letter-spacing:0.05em;" onclick="document.getElementById('proJoinOptions').style.display='none'">MAM PYTANIA — ODDZWOŃCIE</a>
               </div>
@@ -2048,11 +2051,9 @@
               <div id="form-success">
                 <h3>DZIĘKI! MAMY TWÓJ KONTAKT.</h3>
                 <p>Odezwiemy się do Ciebie w sprawie kursu. Masz już decyzję? Wybierz grupę i zapisz się teraz.</p>
-                <a href="#activenow" class="btn-primary" style="display:inline-block;margin-top:1.5rem;" onclick="document.getElementById('activenow-section').style.display='block';setTimeout(function(){document.getElementById('activenow-section').scrollIntoView({behavior:'smooth'})},50);">WYBIERAM GRUPĘ</a>
+                <a href="#courses" class="btn-primary" style="display:inline-block;margin-top:1.5rem;" onclick="document.getElementById('proJoinOptions').style.display='block';document.getElementById('proJoinBtn').textContent='ZAMKNIJ ✕';document.getElementById('activenow-section').style.display='block';setTimeout(function(){document.getElementById('courses').scrollIntoView({behavior:'smooth'})},50);">WYBIERAM GRUPĘ</a>
               </div>
-              <div id="activenow-section" style="display:none;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);">
-                <div class="activenow-form-container activenow-form-147857-container"><center><img src="https://www.activenow.io/assets/ripple.gif" width="100px"/></center><script async src="https://app.activenow.io/external/signup_form/load_by_js?age_group=&city_name=&code=zcDr3k2AqXxRqUBR&discipline_id=&proficiency_id=&school_id=15449&signup_form_id=147857&venue_id=&zz="></script></div>
-              </div>
+
             </div>
           </div>
         </div>
@@ -2220,11 +2221,8 @@
 
     function goToActivenow(e) {
       e.preventDefault();
-      document.getElementById('proJoinOptions').style.display = 'none';
-      document.getElementById('proJoinBtn').textContent = 'CHCĘ DOŁĄCZYĆ';
       var sec = document.getElementById('activenow-section');
-      sec.style.display = 'block';
-      setTimeout(function(){ sec.scrollIntoView({behavior:'smooth'}); }, 50);
+      sec.style.display = sec.style.display === 'none' ? 'block' : 'none';
     }
 
     // ── Countdown nabór ─────────────────────────────────────────
