@@ -1906,6 +1906,37 @@
 
   <!-- KONTAKT / FORMULARZ -->
 
+  <!-- NABOR COUNTDOWN -->
+  <section id="nabor-countdown">
+    <div class="section-full" style="padding:2.5rem 0 1rem;">
+      <div class="section-inner" style="text-align:center;">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;">Do startu naboru</div>
+        <div style="display:flex;justify-content:center;align-items:flex-start;gap:1.25rem;">
+          <div style="text-align:center;min-width:3rem;">
+            <span id="cnt-days" style="font-size:2.8rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
+            <div style="font-size:0.58rem;letter-spacing:0.18em;color:var(--muted);margin-top:0.35rem;">DNI</div>
+          </div>
+          <span style="font-size:2.2rem;color:var(--muted);padding-top:0.25rem;line-height:1;">:</span>
+          <div style="text-align:center;min-width:3rem;">
+            <span id="cnt-hours" style="font-size:2.8rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
+            <div style="font-size:0.58rem;letter-spacing:0.18em;color:var(--muted);margin-top:0.35rem;">GODZ</div>
+          </div>
+          <span style="font-size:2.2rem;color:var(--muted);padding-top:0.25rem;line-height:1;">:</span>
+          <div style="text-align:center;min-width:3rem;">
+            <span id="cnt-mins" style="font-size:2.8rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
+            <div style="font-size:0.58rem;letter-spacing:0.18em;color:var(--muted);margin-top:0.35rem;">MIN</div>
+          </div>
+          <span style="font-size:2.2rem;color:var(--muted);padding-top:0.25rem;line-height:1;">:</span>
+          <div style="text-align:center;min-width:3rem;">
+            <span id="cnt-secs" style="font-size:2.8rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-0.02em;">--</span>
+            <div style="font-size:0.58rem;letter-spacing:0.18em;color:var(--muted);margin-top:0.35rem;">SEK</div>
+          </div>
+        </div>
+        <div style="font-size:0.68rem;color:var(--muted);margin-top:1rem;letter-spacing:0.1em;">18 STYCZNIA 2027 &middot; GODZ. 18:00</div>
+      </div>
+    </div>
+  </section>
+
   <section id="courses">
     <div class="section-full">
       <div class="section-inner">
@@ -1933,8 +1964,12 @@
               <div class="course-price">3 899 zł</div>
               <div class="course-price-note"><strong style="color:var(--text);">Jednorazowo lub w ratach.</strong></div>
               <div class="course-guarantee" style="margin-bottom:1.25rem;">GWARANTOWANY WYSTĘP W KLUBIE</div>
-              <a href="#kontakt" class="btn-primary" style="width:100%;text-align:center;">CHCĘ DOŁĄCZYĆ</a>
-              <p style="font-size:0.72rem;color:var(--muted);text-align:center;margin-top:0.75rem;">Zostaw kontakt - odezwiemy się w sprawie kursu.</p>
+              <button class="btn-primary" id="proJoinBtn" style="width:100%;text-align:center;" onclick="toggleProJoin()">CHCĘ DOŁĄCZYĆ</button>
+              <div id="proJoinOptions" style="display:none;margin-top:1rem;border:1px solid rgba(242,237,236,0.12);border-radius:6px;overflow:hidden;">
+                <a onclick="goToActivenow(event)" href="#" style="display:block;padding:1rem 1.25rem;background:var(--red);color:#fff;text-align:center;font-weight:700;letter-spacing:0.08em;font-size:0.85rem;text-decoration:none;">WYBIERAM GRUPĘ I ZAPISUJĘ SIĘ</a>
+                <div style="padding:0.5rem;text-align:center;font-size:0.7rem;color:var(--muted);">lub</div>
+                <a href="#kontakt" style="display:block;padding:1rem 1.25rem;text-align:center;font-weight:600;color:var(--text);font-size:0.85rem;text-decoration:none;letter-spacing:0.05em;" onclick="document.getElementById('proJoinOptions').style.display='none'">MAM PYTANIA — ODDZWOŃCIE</a>
+              </div>
             </div>
 
             <div class="indyw-toggle" onclick="toggleIndywidualny(this)">
@@ -2168,6 +2203,46 @@
       toggle.classList.toggle('open');
       content.classList.toggle('open');
     }
+
+    function toggleProJoin() {
+      var opts = document.getElementById('proJoinOptions');
+      var btn = document.getElementById('proJoinBtn');
+      var open = opts.style.display !== 'none';
+      opts.style.display = open ? 'none' : 'block';
+      btn.textContent = open ? 'CHCĘ DOŁĄCZYĆ' : 'ZAMKNIJ ✕';
+    }
+
+    function goToActivenow(e) {
+      e.preventDefault();
+      document.getElementById('proJoinOptions').style.display = 'none';
+      document.getElementById('proJoinBtn').textContent = 'CHCĘ DOŁĄCZYĆ';
+      var sec = document.getElementById('activenow-section');
+      sec.style.display = 'block';
+      setTimeout(function(){ sec.scrollIntoView({behavior:'smooth'}); }, 50);
+    }
+
+    // ── Countdown nabór ─────────────────────────────────────────
+    (function() {
+      var target = new Date('2027-01-18T18:00:00+01:00').getTime();
+      function tick() {
+        var diff = target - Date.now();
+        if (diff <= 0) {
+          var el = document.getElementById('nabor-countdown');
+          if (el) el.style.display = 'none';
+          return;
+        }
+        var d = Math.floor(diff / 86400000);
+        var h = Math.floor((diff % 86400000) / 3600000);
+        var m = Math.floor((diff % 3600000) / 60000);
+        var s = Math.floor((diff % 60000) / 1000);
+        document.getElementById('cnt-days').textContent = d;
+        document.getElementById('cnt-hours').textContent = String(h).padStart(2,'0');
+        document.getElementById('cnt-mins').textContent = String(m).padStart(2,'0');
+        document.getElementById('cnt-secs').textContent = String(s).padStart(2,'0');
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
 
     // ═══════════════════════════════════════════════════════════════
     // CONSENT HANDLER — CookieYes advertisement:yes
