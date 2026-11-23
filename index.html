@@ -2044,8 +2044,8 @@
 
           <div>
             <div class="form-card">
-              <div class="form-card-title">MASZ PYTANIA?</div>
-              <div class="form-card-sub">Zostaw numer — oddzwonimy i odpowiemy na wszystko.</div>
+              <div class="form-card-title" id="form-card-title">MASZ PYTANIA?</div>
+              <div class="form-card-sub" id="form-card-sub">Zostaw numer — oddzwonimy i odpowiemy na wszystko.</div>
 
               <form id="lead-form" onsubmit="handleSubmit(event)">
                 <div class="form-group">
@@ -2535,6 +2535,8 @@
 
         form.style.display = 'none';
         document.getElementById('form-success').style.display = 'block';
+        var t = document.getElementById('form-card-title'); if(t) t.style.display='none';
+        var s = document.getElementById('form-card-sub'); if(s) s.style.display='none';
       } else {
         // Przywróć formularz z danymi, pokaż błąd
         btn.textContent = 'WYŚLIJ';
